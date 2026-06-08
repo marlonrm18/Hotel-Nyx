@@ -1,0 +1,28 @@
+# ─── Terraform state & cache ────────────────────────────────────────────────
+.terraform/
+.terraform.lock.hcl
+*.tfstate
+*.tfstate.*
+crash.log
+crash.*.log
+
+# ─── Variables con secretos (sólo el .example se versiona) ──────────────────
+*.tfvars
+!*.tfvars.example
+
+# ─── Overrides locales ───────────────────────────────────────────────────────
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# ─── Directorio de plan ──────────────────────────────────────────────────────
+*.tfplan
+
+# ─── IDE / OS ────────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
