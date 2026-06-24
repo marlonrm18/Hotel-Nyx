@@ -1,0 +1,84 @@
+aws_region         = "us-east-2"
+environment        = "dev"
+project            = "hotel-nyx"
+domain_name        = "hotelnyx.com"
+availability_zones = ["us-east-2a", "us-east-2b"]
+alert_email        = "ops@hotelnyx.com"
+
+# VPC
+vpc_cidr             = "10.0.0.0/16"
+public_subnet_cidrs  = ["10.0.1.0/24", "10.0.2.0/24"]
+private_subnet_cidrs = ["10.0.10.0/24", "10.0.11.0/24"]
+# single_nat_gateway: la redundancia (NAT por AZ) es el atributo prioritario.
+# true = un solo NAT GW (ahorro dev); false = uno por AZ (HA, staging/prod).
+single_nat_gateway = true
+
+# KMS
+kms_deletion_window_days = 7
+
+# ECR
+ecr_image_retention_count = 10
+
+# ALB
+alb_access_logs_bucket     = "" # ej. "hotel-nyx-dev-alb-logs"
+alb_health_check_path      = "/health"
+alb_reservas_path_patterns = ["/api/reservas", "/api/reservas/*"]
+alb_pagos_path_patterns    = ["/api/pagos", "/api/pagos/*"]
+
+# ECS
+# PLACEHOLDER: rellenar TRAS el apply con la URL real del webhook, p. ej.
+# "https://api.hotelnyx.com/api/pagos/webhook". Vacio = sin notification_url.
+mp_notification_url         = ""
+ecs_reservas_image_tag      = "latest"
+ecs_pagos_image_tag         = "latest"
+# Tamaño de tarea (solo el TAMAÑO baja al mínimo; el mínimo de 2 tareas/AZ se
+# mantiene vía ecs_*_min_capacity para no tocar la redundancia).
+ecs_reservas_cpu            = 256
+ecs_reservas_memory         = 512
+ecs_pagos_cpu               = 512
+ecs_pagos_memory            = 1024
+ecs_reservas_min_capacity   = 2
+ecs_reservas_max_capacity   = 6
+ecs_pagos_min_capacity      = 2
+ecs_pagos_max_capacity      = 4
+ecs_cpu_scale_target        = 70
+ecs_alb_requests_per_target = 1000
+ecs_enable_execute_command  = false
+ecs_log_retention_days      = 30
+
+# RDS — tamaño mínimo razonable; Multi-AZ se mantiene siempre.
+rds_postgres_version               = "16.9"
+rds_instance_class                 = "db.t4g.micro"
+rds_allocated_storage              = 20
+rds_max_allocated_storage          = 100
+rds_db_name                        = "hotelnyx"
+rds_master_username                = "hotelnyx_admin"
+rds_backup_retention_days          = 7
+rds_deletion_protection            = false
+rds_skip_final_snapshot            = true # cambiar a false en prod
+rds_performance_insights_retention = 7
+secrets_recovery_window_days       = 7
+
+# Cognito
+cognito_password_min_length    = 12
+cognito_mfa_configuration      = "OFF" # OPTIONAL en prod
+cognito_advanced_security_mode = "OFF" # AUDIT/ENFORCED en prod (costo adicional)
+cognito_callback_urls          = ["https://hotelnyx.com/callback", "https://www.hotelnyx.com/callback"]
+cognito_logout_urls            = ["https://hotelnyx.com", "https://www.hotelnyx.com"]
+
+# API Gateway
+api_cors_allow_origins     = ["https://hotelnyx.com", "https://www.hotelnyx.com"]
+api_throttling_burst_limit = 100
+api_throttling_rate_limit  = 50
+
+# Frontend / CloudFront
+cloudfront_price_class    = "PriceClass_100"
+s3_frontend_force_destroy = true # cambiar a false en staging/prod
+
+# Monitoring
+monitoring_alarm_5xx_threshold        = 10
+monitoring_alarm_latency_threshold_ms = 2000
+monitoring_ecs_cpu_threshold          = 85
+monitoring_rds_cpu_threshold          = 80
+monitoring_rds_free_storage_gb        = 5
+monitoring_rds_connections_threshold  = 100
