@@ -1,0 +1,10 @@
+# Dependencias
+node_modules/
+
+# Variables de entorno LOCALES (nunca versionar — la URL/secretos van en runtime)
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log

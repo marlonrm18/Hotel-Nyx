@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pago — Hotel Nyx</title>
+  <link rel="icon" href="favicon.ico" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+  <header class="site-header">
+    <nav class="nav" aria-label="Principal">
+      <a class="nav__brand" href="index.html">
+        <img src="assets/img/logo.svg" alt="" width="28" height="28" />
+        <span>Hotel Nyx</span>
+      </a>
+      <div class="nav__links">
+        <a href="index.html">Inicio</a>
+        <a href="habitaciones.html">Habitaciones</a>
+        <a href="#" id="logout-link">Cerrar sesión</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main" class="container">
+    <div class="page-head">
+      <span class="eyebrow">Paso 2 de 2 · Pago</span>
+      <h1>Pagar tu reserva</h1>
+      <p>Pago procesado por Mercado Pago. Hotel Nyx nunca ve ni almacena los datos de tu tarjeta.</p>
+    </div>
+
+    <div class="split">
+      <section class="panel">
+        <h2>Método de pago</h2>
+        <p class="card__tipo">Al continuar, completas el pago de forma segura en el entorno de Mercado Pago.</p>
+        <button id="pagar-btn" class="btn btn--primary btn--lg">Pagar con Mercado Pago</button>
+
+        <!-- Aquí el SDK de Mercado Pago renderiza el botón de pago (Wallet Brick) -->
+        <div id="wallet_container"></div>
+
+        <p style="margin-top:var(--sp-4)">
+          <a id="init-point-link" class="btn btn--ghost" href="#" hidden rel="noopener">Continuar al checkout de Mercado Pago</a>
+        </p>
+
+        <div id="message" class="message" hidden role="status" aria-live="polite"></div>
+
+        <p class="auth-note" style="text-align:left">🔒 Conexión cifrada · Verificación del pago del lado del servidor.</p>
+      </section>
+
+      <aside class="split__aside">
+        <section id="resumen-reserva" class="panel" aria-label="Resumen de la reserva"></section>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container"><p class="footer-bottom" style="border:0">© Hotel Nyx — Proyecto educativo.</p></div>
+  </footer>
+
+  <!-- SDK oficial de Mercado Pago (única dependencia externa permitida) -->
+  <script src="https://sdk.mercadopago.com/js/v2"></script>
+  <script src="js/config.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/pago.js"></script>
+  <script>
+    document.getElementById('logout-link').addEventListener('click', function (e) {
+      e.preventDefault(); window.Auth.logout();
+    });
+  </script>
+</body>
+</html>

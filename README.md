@@ -88,6 +88,19 @@ Environment = <dev|staging|prod>
 ManagedBy   = "terraform"
 ```
 
+## Migraciones de base de datos — un solo dueño
+
+Solo **svc-reservas** aplica migraciones (`prisma migrate deploy`) contra la RDS.
+Es el único dueño del esquema, incluida la *exclusion constraint* anti-doble-reserva
+(`app/reservas/prisma/migrations/20260618090106_init/migration.sql`).
+
+**svc-pagos NO migra**: únicamente se conecta a la BD ya migrada. No tiene script
+ni comando de migración y su arranque (`CMD ["node", "src/index.js"]`) nunca dispara
+una migración. Su `schema.prisma` existe solo para `prisma generate` (cliente tipado).
+
+Esto evita migraciones concurrentes desde dos servicios (race conditions / locks)
+y mantiene un único punto de verdad del esquema.
+
 ## Seguridad — checklist rápido
 
 - [ ] Ningún secreto hardcodeado (`random_password` + Secrets Manager)

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Reservar — Hotel Nyx</title>
+  <link rel="icon" href="favicon.ico" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+  <header class="site-header">
+    <nav class="nav" aria-label="Principal">
+      <a class="nav__brand" href="index.html">
+        <img src="assets/img/logo.svg" alt="" width="28" height="28" />
+        <span>Hotel Nyx</span>
+      </a>
+      <div class="nav__links">
+        <a href="index.html">Inicio</a>
+        <a href="habitaciones.html">Habitaciones</a>
+        <a href="#" id="logout-link">Cerrar sesión</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main" class="container">
+    <div class="page-head">
+      <span class="eyebrow">Paso 1 de 2 · Reserva</span>
+      <h1>Confirmar tu reserva</h1>
+      <p>Revisa la habitación y completa los datos del huésped. El pago es el siguiente paso.</p>
+    </div>
+
+    <div class="split">
+      <form id="reserva-form" class="panel" aria-label="Datos de la reserva">
+        <input type="hidden" id="habitacion_id" name="habitacion_id" />
+        <div class="field">
+          <label for="nombre_huesped">Nombre del huésped</label>
+          <input type="text" id="nombre_huesped" name="nombre_huesped" required minlength="2" autocomplete="name" />
+        </div>
+        <div class="field">
+          <label for="email_huesped">Email</label>
+          <input type="email" id="email_huesped" name="email_huesped" required autocomplete="email" />
+        </div>
+        <div class="form-row">
+          <div class="field">
+            <label for="fecha_inicio">Entrada</label>
+            <input type="date" id="fecha_inicio" name="fecha_inicio" required />
+          </div>
+          <div class="field">
+            <label for="fecha_fin">Salida</label>
+            <input type="date" id="fecha_fin" name="fecha_fin" required />
+          </div>
+        </div>
+        <button type="submit" class="btn btn--primary btn--lg btn--block">Reservar y continuar al pago</button>
+        <div id="message" class="message" hidden role="status" aria-live="polite"></div>
+      </form>
+
+      <aside class="split__aside">
+        <section id="resumen-habitacion" class="panel" aria-label="Habitación seleccionada"></section>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container"><p class="footer-bottom" style="border:0">© Hotel Nyx — Proyecto educativo.</p></div>
+  </footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/reserva.js"></script>
+  <script>
+    document.getElementById('logout-link').addEventListener('click', function (e) {
+      e.preventDefault(); window.Auth.logout();
+    });
+  </script>
+</body>
+</html>

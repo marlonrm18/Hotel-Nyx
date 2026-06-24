@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hotel Nyx — Estadías premium, reserva en minutos</title>
+  <meta name="description" content="Hotel Nyx: habitaciones de diseño, disponibilidad en tiempo real y pago seguro con Mercado Pago." />
+  <link rel="icon" href="favicon.ico" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+
+  <header class="site-header">
+    <nav class="nav" aria-label="Principal">
+      <a class="nav__brand" href="index.html">
+        <img src="assets/img/logo.svg" alt="" width="28" height="28" />
+        <span>Hotel Nyx</span>
+      </a>
+      <div class="nav__links">
+        <a class="nav__hide-sm" href="#habitaciones">Habitaciones</a>
+        <a class="nav__hide-sm" href="#servicios">Servicios</a>
+        <a class="nav__hide-sm" href="#nosotros">Nosotros</a>
+        <a class="nav__hide-sm" href="#contacto">Contacto</a>
+        <a id="nav-auth" class="btn btn--ghost btn--small" href="login.html">Ingresar</a>
+        <a class="btn btn--primary btn--small" href="habitaciones.html">Reservar</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <!-- ── Inicio / Hero ─────────────────────────────────────────────── -->
+    <section class="hero" id="inicio" aria-label="Bienvenida">
+      <div class="container hero__inner">
+        <div class="hero__content reveal">
+          <span class="eyebrow">Hotel boutique · Disponibilidad en vivo</span>
+          <h1>Noches que se sienten <span class="accent">extraordinarias</span></h1>
+          <p class="hero__lead">Habitaciones de diseño, atención cuidada al detalle y una reserva tan simple como elegante. Sin sorpresas, sin dobles reservas.</p>
+          <div class="hero__actions">
+            <a class="btn btn--primary btn--lg" href="habitaciones.html">Reservar ahora</a>
+            <a class="btn btn--ghost btn--lg" href="#habitaciones">Ver habitaciones</a>
+          </div>
+          <div class="hero__stats">
+            <div class="hero__stat"><strong>4.9★</strong><span>120+ opiniones</span></div>
+            <div class="hero__stat"><strong>24/7</strong><span>Recepción</span></div>
+            <div class="hero__stat"><strong>100%</strong><span>Pago seguro</span></div>
+          </div>
+        </div>
+        <div class="hero__visual" role="img" aria-label="Ambiente nocturno del Hotel Nyx">
+          <span class="hero__badge" style="display:inline-flex;align-items:center;gap:.5rem">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" fill="#d9b362"/>
+            </svg>
+            Check-in flexible · Cancelación simple
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Habitaciones (preview) ────────────────────────────────────── -->
+    <section class="section" id="habitaciones" aria-label="Habitaciones">
+      <div class="container">
+        <div class="section__head">
+          <span class="eyebrow">Habitaciones</span>
+          <h2>Espacios pensados para descansar</h2>
+          <p class="lead">Una selección para cada viaje. Consulta disponibilidad real por fechas y reserva en segundos.</p>
+        </div>
+        <div class="grid">
+          <article class="card">
+            <span class="badge badge--info">Más elegida</span>
+            <h3>Habitación Doble</h3>
+            <p class="card__tipo">Ideal para dos · 28 m² · Vista ciudad</p>
+            <p class="card__precio">$120 <small>/ noche</small></p>
+            <a class="btn btn--primary" href="habitaciones.html">Ver disponibilidad</a>
+          </article>
+          <article class="card">
+            <span class="badge badge--ok">Recomendada</span>
+            <h3>Suite Nyx</h3>
+            <p class="card__tipo">Amplia y luminosa · 45 m² · Balcón privado</p>
+            <p class="card__precio">$210 <small>/ noche</small></p>
+            <a class="btn btn--primary" href="habitaciones.html">Ver disponibilidad</a>
+          </article>
+          <article class="card">
+            <span class="badge badge--warn">Económica</span>
+            <h3>Individual Confort</h3>
+            <p class="card__tipo">Para viajeros solos · 18 m² · Escritorio</p>
+            <p class="card__precio">$80 <small>/ noche</small></p>
+            <a class="btn btn--primary" href="habitaciones.html">Ver disponibilidad</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Servicios ─────────────────────────────────────────────────── -->
+    <section class="section section--tight" id="servicios" aria-label="Servicios" style="background:var(--c-bg-soft)">
+      <div class="container">
+        <div class="section__head section__head--center">
+          <span class="eyebrow">Servicios</span>
+          <h2>Todo lo que necesitas, incluido</h2>
+        </div>
+        <div class="grid">
+          <div class="feature"><div class="feature__icon" aria-hidden="true">📶</div><h3>Wi-Fi de alta velocidad</h3><p>Conexión fibra en todo el hotel, ideal para trabajar o hacer streaming.</p></div>
+          <div class="feature"><div class="feature__icon" aria-hidden="true">🍳</div><h3>Desayuno gourmet</h3><p>Buffet fresco cada mañana con opciones locales y saludables.</p></div>
+          <div class="feature"><div class="feature__icon" aria-hidden="true">🛎️</div><h3>Recepción 24/7</h3><p>Atención humana a cualquier hora, check-in flexible.</p></div>
+          <div class="feature"><div class="feature__icon" aria-hidden="true">🔒</div><h3>Pago seguro</h3><p>Procesado por Mercado Pago. Tus datos de tarjeta nunca pasan por nosotros.</p></div>
+          <div class="feature"><div class="feature__icon" aria-hidden="true">🧖</div><h3>Spa & bienestar</h3><p>Sauna, gimnasio y masajes con reserva previa.</p></div>
+          <div class="feature"><div class="feature__icon" aria-hidden="true">🅿️</div><h3>Estacionamiento</h3><p>Cochera privada con seguridad las 24 horas.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Galería ───────────────────────────────────────────────────── -->
+    <section class="section" aria-label="Galería">
+      <div class="container">
+        <div class="section__head">
+          <span class="eyebrow">Galería</span>
+          <h2>Un vistazo a Hotel Nyx</h2>
+        </div>
+        <div class="gallery">
+          <div class="gallery__item"><span class="gallery__cap">Lobby principal</span></div>
+          <div class="gallery__item"><span class="gallery__cap">Suite Nyx</span></div>
+          <div class="gallery__item"><span class="gallery__cap">Terraza</span></div>
+          <div class="gallery__item"><span class="gallery__cap">Restaurante</span></div>
+          <div class="gallery__item"><span class="gallery__cap">Spa</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Nosotros ──────────────────────────────────────────────────── -->
+    <section class="section section--tight" id="nosotros" aria-label="Nosotros" style="background:var(--c-bg-soft)">
+      <div class="container">
+        <div class="hero__inner" style="gap:clamp(2rem,5vw,4rem)">
+          <div>
+            <span class="eyebrow">Nosotros</span>
+            <h2>Hospitalidad con alma nocturna</h2>
+            <p class="lead" style="margin-top:var(--sp-3)">Nyx, la diosa griega de la noche, inspira nuestra promesa: convertir cada estadía en un descanso memorable. Combinamos diseño contemporáneo, tecnología sin fricción y un equipo que se preocupa de verdad.</p>
+            <div class="hero__stats">
+              <div class="hero__stat"><strong>2015</strong><span>Desde</span></div>
+              <div class="hero__stat"><strong>48</strong><span>Habitaciones</span></div>
+              <div class="hero__stat"><strong>30+</strong><span>Colaboradores</span></div>
+            </div>
+          </div>
+          <div class="testimonial" aria-hidden="false">
+            <div class="testimonial__stars" aria-label="5 de 5 estrellas">★★★★★</div>
+            <p>“La reserva fue instantánea y el pago, segurísimo. La Suite Nyx superó todas mis expectativas.”</p>
+            <div class="testimonial__who">
+              <span class="avatar" aria-hidden="true">MR</span>
+              <span><strong>María Rodríguez</strong><span>Huésped verificada</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Opiniones ─────────────────────────────────────────────────── -->
+    <section class="section" aria-label="Opiniones de huéspedes">
+      <div class="container">
+        <div class="section__head section__head--center">
+          <span class="eyebrow">Opiniones</span>
+          <h2>Lo que dicen nuestros huéspedes</h2>
+        </div>
+        <div class="grid">
+          <figure class="testimonial">
+            <div class="testimonial__stars">★★★★★</div>
+            <blockquote><p>“Proceso de reserva impecable y sin dobles cargos. Volveré seguro.”</p></blockquote>
+            <figcaption class="testimonial__who"><span class="avatar">JL</span><span><strong>Javier López</strong><span>Viaje de negocios</span></span></figcaption>
+          </figure>
+          <figure class="testimonial">
+            <div class="testimonial__stars">★★★★★</div>
+            <blockquote><p>“Habitaciones preciosas y atención de primera. El desayuno, espectacular.”</p></blockquote>
+            <figcaption class="testimonial__who"><span class="avatar">CS</span><span><strong>Carla Suárez</strong><span>Escapada de fin de semana</span></span></figcaption>
+          </figure>
+          <figure class="testimonial">
+            <div class="testimonial__stars">★★★★☆</div>
+            <blockquote><p>“Muy buena ubicación y check-in rapidísimo. Repetiría sin dudar.”</p></blockquote>
+            <figcaption class="testimonial__who"><span class="avatar">DM</span><span><strong>Diego Méndez</strong><span>Familia</span></span></figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── CTA + Contacto ────────────────────────────────────────────── -->
+    <section class="section" id="contacto" aria-label="Contacto">
+      <div class="container">
+        <div class="cta-band">
+          <h2>¿Listo para tu próxima estadía?</h2>
+          <p>Consulta disponibilidad en tiempo real y asegura tu habitación en minutos.</p>
+          <a class="btn btn--accent btn--lg" href="habitaciones.html">Reservar ahora</a>
+        </div>
+
+        <div class="contact-grid" style="margin-top:var(--sp-6)">
+          <div class="panel">
+            <h3>Hablemos</h3>
+            <ul class="contact-list">
+              <li><span class="ico" aria-hidden="true">📍</span> Av. de las Estrellas 123, Ciudad Nocturna</li>
+              <li><span class="ico" aria-hidden="true">✉️</span> reservas@hotelnyx.example</li>
+              <li><span class="ico" aria-hidden="true">☎️</span> +54 11 5555 0123</li>
+              <li><span class="ico" aria-hidden="true">🕑</span> Recepción 24 horas, todos los días</li>
+            </ul>
+          </div>
+          <div class="panel">
+            <h3>Cómo llegar</h3>
+            <p class="card__tipo">A 10 minutos del centro y 25 del aeropuerto. Estacionamiento privado para huéspedes.</p>
+            <p style="margin-top:var(--sp-4)"><a class="btn btn--ghost" href="habitaciones.html">Ver habitaciones disponibles</a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ── Footer ──────────────────────────────────────────────────────── -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="nav__brand" href="index.html"><img src="assets/img/logo.svg" alt="" width="26" height="26" /><span>Hotel Nyx</span></a>
+          <p>Estadías premium con reserva sencilla y pago seguro. Un proyecto educativo.</p>
+        </div>
+        <div>
+          <h4>Explorar</h4>
+          <ul>
+            <li><a href="#habitaciones">Habitaciones</a></li>
+            <li><a href="#servicios">Servicios</a></li>
+            <li><a href="#nosotros">Nosotros</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Reservar</h4>
+          <ul>
+            <li><a href="habitaciones.html">Buscar disponibilidad</a></li>
+            <li><a href="login.html">Ingresar</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Contacto</h4>
+          <ul>
+            <li><a href="#contacto">Ubicación</a></li>
+            <li><a href="mailto:reservas@hotelnyx.example">reservas@hotelnyx.example</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">© Hotel Nyx — Proyecto educativo. Todos los derechos reservados.</div>
+    </div>
+  </footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/auth.js"></script>
+  <script>
+    // Ajusta el enlace de la barra segun el estado de sesion.
+    (function () {
+      var nav = document.getElementById('nav-auth');
+      if (window.Auth && window.Auth.isAuthenticated()) {
+        nav.textContent = 'Cerrar sesion';
+        nav.href = '#';
+        nav.addEventListener('click', function (e) { e.preventDefault(); window.Auth.logout(); });
+      }
+    })();
+  </script>
+</body>
+</html>

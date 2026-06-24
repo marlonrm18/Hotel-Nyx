@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Habitaciones — Hotel Nyx</title>
+  <link rel="icon" href="favicon.ico" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+  <header class="site-header">
+    <nav class="nav" aria-label="Principal">
+      <a class="nav__brand" href="index.html">
+        <img src="assets/img/logo.svg" alt="" width="28" height="28" />
+        <span>Hotel Nyx</span>
+      </a>
+      <div class="nav__links">
+        <a href="index.html">Inicio</a>
+        <a href="habitaciones.html">Habitaciones</a>
+        <a href="#" id="logout-link">Cerrar sesión</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main" class="container">
+    <div class="page-head">
+      <span class="eyebrow">Disponibilidad en vivo</span>
+      <h1>Buscar habitaciones</h1>
+      <p>Elige tus fechas y la cantidad de huéspedes para ver qué está libre.</p>
+    </div>
+
+    <form id="search-form" class="panel" aria-label="Buscar habitaciones disponibles">
+      <div class="form-row">
+        <div class="field">
+          <label for="fecha_inicio">Entrada (check-in)</label>
+          <input type="date" id="fecha_inicio" name="fecha_inicio" required />
+        </div>
+        <div class="field">
+          <label for="fecha_fin">Salida (check-out)</label>
+          <input type="date" id="fecha_fin" name="fecha_fin" required />
+        </div>
+        <div class="field">
+          <label for="capacidad">Huéspedes (mín.)</label>
+          <input type="number" id="capacidad" name="capacidad" min="1" placeholder="2" />
+        </div>
+        <div class="field" style="display:flex;align-items:flex-end">
+          <button type="submit" class="btn btn--primary btn--block">Buscar disponibles</button>
+        </div>
+      </div>
+    </form>
+
+    <div id="message" class="message" hidden role="status" aria-live="polite"></div>
+
+    <section aria-label="Resultados" style="margin-top:var(--sp-5)">
+      <div id="resultados" class="grid"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container"><p class="footer-bottom" style="border:0">© Hotel Nyx — Proyecto educativo.</p></div>
+  </footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/habitaciones.js"></script>
+  <script>
+    document.getElementById('logout-link').addEventListener('click', function (e) {
+      e.preventDefault(); window.Auth.logout();
+    });
+  </script>
+</body>
+</html>

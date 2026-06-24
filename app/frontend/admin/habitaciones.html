@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin · Habitaciones — Hotel Nyx</title>
+  <link rel="icon" href="../favicon.ico" />
+  <link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+  <header class="site-header">
+    <nav class="nav" aria-label="Administración">
+      <a class="nav__brand" href="../index.html">
+        <img src="../assets/img/logo.svg" alt="" width="28" height="28" />
+        <span>Hotel Nyx · Admin</span>
+      </a>
+      <div class="nav__links">
+        <a href="index.html">Dashboard</a>
+        <a href="habitaciones.html">Habitaciones</a>
+        <a href="reservas.html">Reservas</a>
+        <a href="#" id="logout-link">Cerrar sesión</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main" class="container">
+    <div class="page-head">
+      <span class="eyebrow">Gestión</span>
+      <h1>Habitaciones</h1>
+      <p>Crea nuevas habitaciones y consulta el inventario actual.</p>
+    </div>
+
+    <div id="message" class="message" hidden role="status" aria-live="polite"></div>
+
+    <section class="panel">
+      <h2>Nueva habitación</h2>
+      <form id="habitacion-form" aria-label="Crear habitación">
+        <div class="form-row">
+          <div class="field">
+            <label for="numero">Número</label>
+            <input type="number" id="numero" min="1" required />
+          </div>
+          <div class="field">
+            <label for="tipo">Tipo</label>
+            <input type="text" id="tipo" placeholder="Doble, Suite…" required />
+          </div>
+          <div class="field">
+            <label for="capacidad">Capacidad</label>
+            <input type="number" id="capacidad" min="1" required />
+          </div>
+          <div class="field">
+            <label for="precio_noche">Precio / noche</label>
+            <input type="number" id="precio_noche" min="0" step="0.01" required />
+          </div>
+          <div class="field">
+            <label for="estado">Estado</label>
+            <select id="estado">
+              <option value="disponible">disponible</option>
+              <option value="mantenimiento">mantenimiento</option>
+            </select>
+          </div>
+        </div>
+        <button type="submit" class="btn btn--primary">Crear habitación</button>
+      </form>
+      <p class="card__tipo" style="margin-top:var(--sp-3)">
+        Nota: editar el estado de una habitación existente requiere un endpoint
+        de actualización en el backend (aún no implementado). Por ahora solo se
+        listan y se crean.
+      </p>
+    </section>
+
+    <section class="panel">
+      <h2>Inventario</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Número</th><th>Tipo</th><th>Cap.</th><th>Precio</th><th>Estado</th></tr>
+          </thead>
+          <tbody id="tabla-habitaciones"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container"><p class="footer-bottom" style="border:0">© Hotel Nyx — Panel administrativo.</p></div>
+  </footer>
+
+  <script>window.ADMIN_PAGE = 'habitaciones';</script>
+  <script src="../js/config.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/api.js"></script>
+  <script src="../js/ui.js"></script>
+  <script src="../js/admin.js"></script>
+  <script>
+    document.getElementById('logout-link').addEventListener('click', function (e) {
+      e.preventDefault(); window.Auth.logout();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Confirmación — Hotel Nyx</title>
+  <link rel="icon" href="favicon.ico" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+  <header class="site-header">
+    <nav class="nav" aria-label="Principal">
+      <a class="nav__brand" href="index.html">
+        <img src="assets/img/logo.svg" alt="" width="28" height="28" />
+        <span>Hotel Nyx</span>
+      </a>
+      <div class="nav__links">
+        <a href="index.html">Inicio</a>
+        <a href="habitaciones.html">Habitaciones</a>
+        <a href="#" id="logout-link">Cerrar sesión</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main" class="container">
+    <div class="page-head">
+      <span class="eyebrow">Estado verificado en el servidor</span>
+      <h1>Resumen de tu reserva</h1>
+    </div>
+
+    <p id="estado-box" class="badge" hidden></p>
+
+    <section id="detalle" class="panel" aria-label="Detalle de la reserva y el pago" style="margin-top:var(--sp-4)"></section>
+
+    <div id="message" class="message" hidden role="status" aria-live="polite"></div>
+
+    <div class="auth-actions-row" style="margin-top:var(--sp-5)">
+      <button id="refrescar-btn" class="btn btn--ghost" hidden>Actualizar estado</button>
+      <a class="btn btn--primary" href="habitaciones.html">Hacer otra reserva</a>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container"><p class="footer-bottom" style="border:0">© Hotel Nyx — Proyecto educativo.</p></div>
+  </footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/confirmacion.js"></script>
+  <script>
+    document.getElementById('logout-link').addEventListener('click', function (e) {
+      e.preventDefault(); window.Auth.logout();
+    });
+  </script>
+</body>
+</html>

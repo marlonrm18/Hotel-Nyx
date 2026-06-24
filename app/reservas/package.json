@@ -1,0 +1,25 @@
+{
+  "name": "svc-reservas",
+  "version": "0.1.0",
+  "description": "Hotel Nyx - Microservicio de Reservas",
+  "private": true,
+  "type": "commonjs",
+  "main": "src/index.js",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js",
+    "prisma:generate": "prisma generate"
+  },
+  "dependencies": {
+    "@aws-sdk/client-secrets-manager": "^3.600.0",
+    "@prisma/client": "^5.16.0",
+    "express": "^4.19.2",
+    "pino": "^9.2.0"
+  },
+  "devDependencies": {
+    "prisma": "^5.16.0"
+  }
+}

@@ -1,0 +1,19 @@
+# ⚠️ SOLO PARA PRUEBA LOCAL — no es infraestructura real (la infra vive en iac/).
+# Postgres local efímero para probar svc-reservas/svc-pagos sin AWS.
+# Levantar:  docker compose -f local-test/docker-compose.yml up -d
+# Apagar:    docker compose -f local-test/docker-compose.yml down
+services:
+  postgres:
+    image: postgres:16
+    container_name: hotelnyx-local-pg
+    environment:
+      POSTGRES_USER: hotelnyx
+      POSTGRES_PASSWORD: localpassword
+      POSTGRES_DB: hotelnyx
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U hotelnyx -d hotelnyx"]
+      interval: 3s
+      timeout: 3s
+      retries: 15

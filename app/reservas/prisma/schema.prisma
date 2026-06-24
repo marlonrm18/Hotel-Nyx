@@ -1,0 +1,105 @@
+// Hotel Nyx — Schema Prisma (PostgreSQL)
+// Compartido por los microservicios `reservas` y `pagos` (mismo schema por ahora).
+//
+// La URL de conexion NO se define aqui de forma estatica: se construye en
+// runtime leyendo la password desde AWS Secrets Manager (ver src/db/index.js).
+// La env var DATABASE_URL solo se usa para `prisma generate` / migraciones en
+// entornos controlados; en produccion el cliente recibe la url por datasources.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ─── Enums de estado ─────────────────────────────────────────────────────────
+
+enum EstadoHabitacion {
+  disponible
+  mantenimiento
+}
+
+enum EstadoReserva {
+  pendiente
+  confirmada
+  cancelada
+}
+
+enum EstadoPago {
+  pendiente
+  aprobado
+  rechazado
+}
+
+// ─── Tablas ──────────────────────────────────────────────────────────────────
+
+model Habitacion {
+  id          Int              @id @default(autoincrement())
+  numero      Int              @unique
+  tipo        String
+  capacidad   Int
+  precioNoche Decimal          @map("precio_noche") @db.Decimal(10, 2)
+  estado      EstadoHabitacion @default(disponible)
+  createdAt   DateTime         @default(now()) @map("created_at")
+  updatedAt   DateTime         @updatedAt @map("updated_at")
+
+  reservas    Reserva[]
+
+  @@map("habitaciones")
+}
+
+model Reserva {
+  id            Int           @id @default(autoincrement())
+  habitacionId  Int           @map("habitacion_id")
+  nombreHuesped String        @map("nombre_huesped")
+  emailHuesped  String        @map("email_huesped")
+  fechaInicio   DateTime      @map("fecha_inicio") @db.Date
+  fechaFin      DateTime      @map("fecha_fin") @db.Date
+  estado        EstadoReserva @default(pendiente)
+  createdAt     DateTime      @default(now()) @map("created_at")
+  updatedAt     DateTime      @updatedAt @map("updated_at")
+
+  habitacion    Habitacion    @relation(fields: [habitacionId], references: [id])
+  pagos         Pago[]
+
+  @@index([habitacionId])
+  @@map("reservas")
+}
+
+model Pago {
+  id          Int        @id @default(autoincrement())
+  reservaId   Int        @map("reserva_id")
+  monto       Decimal    @db.Decimal(10, 2)
+  estado      EstadoPago @default(pendiente)
+  // ID del pago en Mercado Pago. Nullable: se completa al crear el pago en MP.
+  mpPaymentId String?    @map("mp_payment_id")
+  createdAt   DateTime   @default(now()) @map("created_at")
+  updatedAt   DateTime   @updatedAt @map("updated_at")
+
+  reserva     Reserva    @relation(fields: [reservaId], references: [id])
+
+  @@index([reservaId])
+  @@map("pagos")
+}
+
+// ─── REQUISITO CRITICO: anti-doble-reserva (EXCLUSION CONSTRAINT) ─────────────
+//
+// Prisma NO soporta EXCLUSION CONSTRAINT de forma nativa en el schema. Por eso
+// se aplica como SQL en la migracion (ver prisma/migrations/exclusion_constraint.sql).
+// Esta constraint impide que existan dos reservas con estado `pendiente` o
+// `confirmada` cuyo rango de fechas se solape para la MISMA habitacion_id.
+//
+// Resumen del SQL a aplicar (detalle en el archivo .sql):
+//
+//   CREATE EXTENSION IF NOT EXISTS btree_gist;
+//
+//   ALTER TABLE reservas
+//     ADD CONSTRAINT reservas_no_overlap
+//     EXCLUDE USING gist (
+//       habitacion_id WITH =,
+//       daterange(fecha_inicio, fecha_fin, '[)') WITH &&   -- fin EXCLUSIVO: el
+//     )                                                    -- checkout puede ser
+//     WHERE (estado IN ('pendiente', 'confirmada'));        -- el check-in siguiente

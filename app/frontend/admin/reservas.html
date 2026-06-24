@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin · Reservas — Hotel Nyx</title>
+  <link rel="icon" href="../favicon.ico" />
+  <link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+  <header class="site-header">
+    <nav class="nav" aria-label="Administración">
+      <a class="nav__brand" href="../index.html">
+        <img src="../assets/img/logo.svg" alt="" width="28" height="28" />
+        <span>Hotel Nyx · Admin</span>
+      </a>
+      <div class="nav__links">
+        <a href="index.html">Dashboard</a>
+        <a href="habitaciones.html">Habitaciones</a>
+        <a href="reservas.html">Reservas</a>
+        <a href="#" id="logout-link">Cerrar sesión</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main" class="container">
+    <div class="page-head">
+      <span class="eyebrow">Operación</span>
+      <h1>Reservas y pagos</h1>
+      <p>Filtra por estado y gestiona la confirmación o cancelación de cada reserva.</p>
+    </div>
+
+    <div class="field" style="max-width:260px">
+      <label for="filtro-estado">Filtrar por estado</label>
+      <select id="filtro-estado">
+        <option value="">Todas</option>
+        <option value="pendiente">pendiente</option>
+        <option value="confirmada">confirmada</option>
+        <option value="cancelada">cancelada</option>
+      </select>
+    </div>
+
+    <div id="message" class="message" hidden role="status" aria-live="polite"></div>
+
+    <section class="panel">
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>ID</th><th>Huésped</th><th>Hab.</th><th>Fechas</th><th>Estado</th><th>Acciones</th></tr>
+          </thead>
+          <tbody id="tabla-reservas"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container"><p class="footer-bottom" style="border:0">© Hotel Nyx — Panel administrativo.</p></div>
+  </footer>
+
+  <script>window.ADMIN_PAGE = 'reservas';</script>
+  <script src="../js/config.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/api.js"></script>
+  <script src="../js/ui.js"></script>
+  <script src="../js/admin.js"></script>
+  <script>
+    document.getElementById('logout-link').addEventListener('click', function (e) {
+      e.preventDefault(); window.Auth.logout();
+    });
+  </script>
+</body>
+</html>

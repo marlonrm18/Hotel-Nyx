@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ingresar — Hotel Nyx</title>
+  <link rel="icon" href="favicon.ico" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+  <header class="site-header">
+    <nav class="nav" aria-label="Principal">
+      <a class="nav__brand" href="index.html">
+        <img src="assets/img/logo.svg" alt="" width="28" height="28" />
+        <span>Hotel Nyx</span>
+      </a>
+      <div class="nav__links">
+        <a href="index.html">Inicio</a>
+        <a class="btn btn--primary btn--small" href="habitaciones.html">Reservar</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main" class="container">
+    <section class="auth-wrap">
+      <div class="panel auth-card">
+        <span class="eyebrow">Acceso de huéspedes</span>
+        <h1>Bienvenido de vuelta</h1>
+        <p class="card__tipo">Inicia sesión o crea tu cuenta para reservar. La autenticación la gestiona Amazon Cognito de forma segura.</p>
+
+        <div id="message" class="message" hidden role="status" aria-live="polite"></div>
+
+        <div id="auth-actions">
+          <div class="field">
+            <button id="login-btn" class="btn btn--primary btn--block btn--lg">Iniciar sesión</button>
+          </div>
+          <div class="field">
+            <button id="signup-btn" class="btn btn--ghost btn--block">Crear cuenta</button>
+          </div>
+          <p class="auth-note">🔒 Conexión segura. Nunca pedimos tu contraseña fuera de Cognito.</p>
+        </div>
+
+        <div id="logged-in" hidden>
+          <p>Ya iniciaste sesión.</p>
+          <div class="auth-actions-row">
+            <a class="btn btn--primary" href="habitaciones.html">Buscar habitaciones</a>
+            <button id="logout-btn" class="btn btn--ghost">Cerrar sesión</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container"><p class="footer-bottom" style="border:0">© Hotel Nyx — Proyecto educativo.</p></div>
+  </footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/ui.js"></script>
+  <script>
+    (function () {
+      var message = document.getElementById('message');
+      var actions = document.getElementById('auth-actions');
+      var loggedIn = document.getElementById('logged-in');
+
+      if (UI.qs('denied')) {
+        UI.showError(message, { message: 'Tu cuenta no tiene permisos de administrador.' });
+      }
+
+      function mostrarEstado() {
+        var auth = window.Auth.isAuthenticated();
+        actions.hidden = auth;
+        loggedIn.hidden = !auth;
+      }
+
+      // 1. Si volvemos del Hosted UI con ?code=, intercambiamos por tokens.
+      window.Auth.handleRedirectCallback()
+        .then(function (procesado) {
+          if (procesado) {
+            var back = window.Auth.consumeReturnTo();
+            window.location.assign(back || 'habitaciones.html');
+            return;
+          }
+          mostrarEstado();
+        })
+        .catch(function (err) {
+          UI.showError(message, err);
+          mostrarEstado();
+        });
+
+      document.getElementById('login-btn').addEventListener('click', function () {
+        window.Auth.startLogin();
+      });
+      document.getElementById('signup-btn').addEventListener('click', function () {
+        window.Auth.startLogin({ signup: true });
+      });
+      document.getElementById('logout-btn').addEventListener('click', function () {
+        window.Auth.logout();
+      });
+    })();
+  </script>
+</body>
+</html>

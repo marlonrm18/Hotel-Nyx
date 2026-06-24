@@ -1,0 +1,1146 @@
+<?xml version="1.0" ?>
+<testsuites disabled="0" errors="0" failures="35" tests="368" time="0.0">
+	<testsuite disabled="0" errors="0" failures="35" name="terraform scan" skipped="0" tests="368" time="0">
+		<properties>
+			<property name="directory" value="['/tf']"/>
+			<property name="add_check" value="False"/>
+			<property name="list" value="False"/>
+			<property name="output" value="['junitxml']"/>
+			<property name="output_file_path" value="results.xml"/>
+			<property name="output_bc_ids" value="False"/>
+			<property name="include_all_checkov_policies" value="True"/>
+			<property name="quiet" value="False"/>
+			<property name="compact" value="False"/>
+			<property name="framework" value="['all']"/>
+			<property name="skip_framework" value="[]"/>
+			<property name="run_all_external_checks" value="False"/>
+			<property name="soft_fail" value="False"/>
+			<property name="skip_results_upload" value="False"/>
+			<property name="repo_id" value="cli_repo/tf"/>
+			<property name="branch" value="master"/>
+			<property name="skip_download" value="False"/>
+			<property name="use_enforcement_rules" value="False"/>
+			<property name="external_modules_download_path" value=".external_modules"/>
+			<property name="evaluate_variables" value="True"/>
+			<property name="no_cert_verify" value="False"/>
+			<property name="create_baseline" value="False"/>
+			<property name="output_baseline_as_skipped" value="False"/>
+			<property name="secrets_scan_file_type" value="[]"/>
+			<property name="enable_secret_scan_all_files" value="False"/>
+			<property name="block_list_secret_scan" value="[]"/>
+			<property name="summary_position" value="top"/>
+			<property name="skip_resources_without_violations" value="False"/>
+			<property name="deep_analysis" value="False"/>
+			<property name="no_fail_on_crash" value="False"/>
+			<property name="mask" value="defaultdict(&lt;class 'set'&gt;, {})"/>
+			<property name="scan_secrets_history" value="False"/>
+			<property name="secrets_history_timeout" value="12h"/>
+			<property name="custom_tool_name" value="Checkov"/>
+		</properties>
+		<testcase name="[NONE][CKV_AWS_233] Ensure Create before destroy for ACM certificates" classname="/alb.tf.aws_acm_certificate.main" file="/alb.tf"/>
+		<testcase name="[NONE][CKV_AWS_234] Verify logging preference for ACM certificates" classname="/alb.tf.aws_acm_certificate.main" file="/alb.tf"/>
+		<testcase name="[NONE][CKV_AWS_91] Ensure the ELBv2 (Application/Network) has access logging enabled" classname="/alb.tf.aws_lb.main" file="/alb.tf"/>
+		<testcase name="[NONE][CKV_AWS_150] Ensure that Load Balancer has deletion protection enabled" classname="/alb.tf.aws_lb.main" file="/alb.tf"/>
+		<testcase name="[NONE][CKV_AWS_328] Ensure that ALB is configured with defensive or strictest desync mitigation mode" classname="/alb.tf.aws_lb.main" file="/alb.tf"/>
+		<testcase name="[NONE][CKV_AWS_261] Ensure HTTP HTTPS Target group defines Healthcheck" classname="/alb.tf.aws_lb_target_group.reservas" file="/alb.tf"/>
+		<testcase name="[NONE][CKV_AWS_261] Ensure HTTP HTTPS Target group defines Healthcheck" classname="/alb.tf.aws_lb_target_group.pagos" file="/alb.tf"/>
+		<testcase name="[NONE][CKV_AWS_2] Ensure ALB protocol is HTTPS" classname="/alb.tf.aws_lb_listener.http" file="/alb.tf"/>
+		<testcase name="[NONE][CKV_AWS_2] Ensure ALB protocol is HTTPS" classname="/alb.tf.aws_lb_listener.https" file="/alb.tf"/>
+		<testcase name="[NONE][CKV_AWS_66] Ensure that CloudWatch Log Group specifies retention days" classname="/api_gateway.tf.aws_cloudwatch_log_group.api_gateway" file="/api_gateway.tf"/>
+		<testcase name="[NONE][CKV_AWS_158] Ensure that CloudWatch Log Group is encrypted by KMS" classname="/api_gateway.tf.aws_cloudwatch_log_group.api_gateway" file="/api_gateway.tf"/>
+		<testcase name="[NONE][CKV_AWS_309] Ensure API GatewayV2 routes specify an authorization type" classname="/api_gateway.tf.aws_apigatewayv2_route.reservas" file="/api_gateway.tf"/>
+		<testcase name="[NONE][CKV_AWS_309] Ensure API GatewayV2 routes specify an authorization type" classname="/api_gateway.tf.aws_apigatewayv2_route.pagos" file="/api_gateway.tf"/>
+		<testcase name="[NONE][CKV_AWS_309] Ensure API GatewayV2 routes specify an authorization type" classname="/api_gateway.tf.aws_apigatewayv2_route.admin" file="/api_gateway.tf"/>
+		<testcase name="[NONE][CKV_AWS_76] Ensure API Gateway has Access Logging enabled" classname="/api_gateway.tf.aws_apigatewayv2_stage.default" file="/api_gateway.tf"/>
+		<testcase name="[NONE][CKV_AWS_227] Ensure KMS key is enabled" classname="/ecr.tf.aws_kms_key.ecr" file="/ecr.tf"/>
+		<testcase name="[NONE][CKV_AWS_33] Ensure KMS key policy does not contain wildcard (*) principal" classname="/ecr.tf.aws_kms_key.ecr" file="/ecr.tf"/>
+		<testcase name="[NONE][CKV_AWS_7] Ensure rotation for customer created CMKs is enabled" classname="/ecr.tf.aws_kms_key.ecr" file="/ecr.tf"/>
+		<testcase name="[NONE][CKV_AWS_163] Ensure ECR image scanning on push is enabled" classname="/ecr.tf.aws_ecr_repository.svc_reservas" file="/ecr.tf"/>
+		<testcase name="[NONE][CKV_AWS_51] Ensure ECR Image Tags are immutable" classname="/ecr.tf.aws_ecr_repository.svc_reservas" file="/ecr.tf"/>
+		<testcase name="[NONE][CKV_AWS_136] Ensure that ECR repositories are encrypted using KMS" classname="/ecr.tf.aws_ecr_repository.svc_reservas" file="/ecr.tf"/>
+		<testcase name="[NONE][CKV_AWS_163] Ensure ECR image scanning on push is enabled" classname="/ecr.tf.aws_ecr_repository.svc_pagos" file="/ecr.tf"/>
+		<testcase name="[NONE][CKV_AWS_51] Ensure ECR Image Tags are immutable" classname="/ecr.tf.aws_ecr_repository.svc_pagos" file="/ecr.tf"/>
+		<testcase name="[NONE][CKV_AWS_136] Ensure that ECR repositories are encrypted using KMS" classname="/ecr.tf.aws_ecr_repository.svc_pagos" file="/ecr.tf"/>
+		<testcase name="[NONE][CKV_AWS_227] Ensure KMS key is enabled" classname="/ecs.tf.aws_kms_key.ecs_logs" file="/ecs.tf"/>
+		<testcase name="[NONE][CKV_AWS_33] Ensure KMS key policy does not contain wildcard (*) principal" classname="/ecs.tf.aws_kms_key.ecs_logs" file="/ecs.tf"/>
+		<testcase name="[NONE][CKV_AWS_7] Ensure rotation for customer created CMKs is enabled" classname="/ecs.tf.aws_kms_key.ecs_logs" file="/ecs.tf"/>
+		<testcase name="[NONE][CKV_AWS_66] Ensure that CloudWatch Log Group specifies retention days" classname="/ecs.tf.aws_cloudwatch_log_group.svc_reservas" file="/ecs.tf"/>
+		<testcase name="[NONE][CKV_AWS_158] Ensure that CloudWatch Log Group is encrypted by KMS" classname="/ecs.tf.aws_cloudwatch_log_group.svc_reservas" file="/ecs.tf"/>
+		<testcase name="[NONE][CKV_AWS_66] Ensure that CloudWatch Log Group specifies retention days" classname="/ecs.tf.aws_cloudwatch_log_group.svc_pagos" file="/ecs.tf"/>
+		<testcase name="[NONE][CKV_AWS_158] Ensure that CloudWatch Log Group is encrypted by KMS" classname="/ecs.tf.aws_cloudwatch_log_group.svc_pagos" file="/ecs.tf"/>
+		<testcase name="[NONE][CKV_AWS_65] Ensure container insights are enabled on ECS cluster" classname="/ecs.tf.aws_ecs_cluster.main" file="/ecs.tf"/>
+		<testcase name="[NONE][CKV_AWS_223] Ensure ECS Cluster enables logging of ECS Exec" classname="/ecs.tf.aws_ecs_cluster.main" file="/ecs.tf"/>
+		<testcase name="[NONE][CKV_AWS_97] Ensure Encryption in transit is enabled for EFS volumes in ECS Task definitions" classname="/ecs.tf.aws_ecs_task_definition.reservas" file="/ecs.tf"/>
+		<testcase name="[NONE][CKV_AWS_249] Ensure that the Execution Role ARN and the Task Role ARN are different in ECS Task definitions" classname="/ecs.tf.aws_ecs_task_definition.reservas" file="/ecs.tf"/>
+		<testcase name="[NONE][CKV_AWS_336] Ensure ECS containers are limited to read-only access to root filesystems" classname="/ecs.tf.aws_ecs_task_definition.reservas" file="/ecs.tf"/>
+		<testcase name="[NONE][CKV_AWS_97] Ensure Encryption in transit is enabled for EFS volumes in ECS Task definitions" classname="/ecs.tf.aws_ecs_task_definition.pagos" file="/ecs.tf"/>
+		<testcase name="[NONE][CKV_AWS_249] Ensure that the Execution Role ARN and the Task Role ARN are different in ECS Task definitions" classname="/ecs.tf.aws_ecs_task_definition.pagos" file="/ecs.tf"/>
+		<testcase name="[NONE][CKV_AWS_336] Ensure ECS containers are limited to read-only access to root filesystems" classname="/ecs.tf.aws_ecs_task_definition.pagos" file="/ecs.tf"/>
+		<testcase name="[NONE][CKV_AWS_332] Ensure ECS Fargate services run on the latest Fargate platform version" classname="/ecs.tf.aws_ecs_service.reservas" file="/ecs.tf"/>
+		<testcase name="[NONE][CKV_AWS_333] Ensure ECS services do not have public IP addresses assigned to them automatically" classname="/ecs.tf.aws_ecs_service.reservas" file="/ecs.tf"/>
+		<testcase name="[NONE][CKV_AWS_332] Ensure ECS Fargate services run on the latest Fargate platform version" classname="/ecs.tf.aws_ecs_service.pagos" file="/ecs.tf"/>
+		<testcase name="[NONE][CKV_AWS_333] Ensure ECS services do not have public IP addresses assigned to them automatically" classname="/ecs.tf.aws_ecs_service.pagos" file="/ecs.tf"/>
+		<testcase name="[NONE][CKV_AWS_110] Ensure IAM policies does not allow privilege escalation" classname="/ecs.tf.aws_iam_policy_document.ecs_logs_kms" file="/ecs.tf"/>
+		<testcase name="[NONE][CKV_AWS_358] Ensure AWS GitHub Actions OIDC authorization policies only allow safe claims and claim order" classname="/ecs.tf.aws_iam_policy_document.ecs_logs_kms" file="/ecs.tf"/>
+		<testcase name="[NONE][CKV_AWS_107] Ensure IAM policies does not allow credentials exposure" classname="/ecs.tf.aws_iam_policy_document.ecs_logs_kms" file="/ecs.tf"/>
+		<testcase name="[NONE][CKV_AWS_1] Ensure IAM policies that allow full &quot;*-*&quot; administrative privileges are not created" classname="/ecs.tf.aws_iam_policy_document.ecs_logs_kms" file="/ecs.tf"/>
+		<testcase name="[NONE][CKV_AWS_283] Ensure no IAM policies documents allow ALL or any AWS principal permissions to the resource" classname="/ecs.tf.aws_iam_policy_document.ecs_logs_kms" file="/ecs.tf"/>
+		<testcase name="[NONE][CKV_AWS_49] Ensure no IAM policies documents allow &quot;*&quot; as a statement's actions" classname="/ecs.tf.aws_iam_policy_document.ecs_logs_kms" file="/ecs.tf"/>
+		<testcase name="[NONE][CKV_AWS_108] Ensure IAM policies does not allow data exfiltration" classname="/ecs.tf.aws_iam_policy_document.ecs_logs_kms" file="/ecs.tf"/>
+		<testcase name="[NONE][CKV_AWS_227] Ensure KMS key is enabled" classname="/frontend.tf.aws_kms_key.frontend" file="/frontend.tf"/>
+		<testcase name="[NONE][CKV_AWS_33] Ensure KMS key policy does not contain wildcard (*) principal" classname="/frontend.tf.aws_kms_key.frontend" file="/frontend.tf"/>
+		<testcase name="[NONE][CKV_AWS_7] Ensure rotation for customer created CMKs is enabled" classname="/frontend.tf.aws_kms_key.frontend" file="/frontend.tf"/>
+		<testcase name="[NONE][CKV_AWS_93] Ensure S3 bucket policy does not lockout all but root user. (Prevent lockouts needing root account fixes)" classname="/frontend.tf.aws_s3_bucket.frontend" file="/frontend.tf"/>
+		<testcase name="[NONE][CKV_AWS_53] Ensure S3 bucket has block public ACLS enabled" classname="/frontend.tf.aws_s3_bucket_public_access_block.frontend" file="/frontend.tf"/>
+		<testcase name="[NONE][CKV_AWS_55] Ensure S3 bucket has ignore public ACLs enabled" classname="/frontend.tf.aws_s3_bucket_public_access_block.frontend" file="/frontend.tf"/>
+		<testcase name="[NONE][CKV_AWS_56] Ensure S3 bucket has 'restrict_public_buckets' enabled" classname="/frontend.tf.aws_s3_bucket_public_access_block.frontend" file="/frontend.tf"/>
+		<testcase name="[NONE][CKV_AWS_54] Ensure S3 bucket has block public policy enabled" classname="/frontend.tf.aws_s3_bucket_public_access_block.frontend" file="/frontend.tf"/>
+		<testcase name="[NONE][CKV_AWS_300] Ensure S3 lifecycle configuration sets period for aborting failed uploads" classname="/frontend.tf.aws_s3_bucket_lifecycle_configuration.frontend" file="/frontend.tf"/>
+		<testcase name="[NONE][CKV_AWS_93] Ensure S3 bucket policy does not lockout all but root user. (Prevent lockouts needing root account fixes)" classname="/frontend.tf.aws_s3_bucket_policy.frontend" file="/frontend.tf"/>
+		<testcase name="[NONE][CKV_AWS_233] Ensure Create before destroy for ACM certificates" classname="/frontend.tf.aws_acm_certificate.cloudfront" file="/frontend.tf"/>
+		<testcase name="[NONE][CKV_AWS_234] Verify logging preference for ACM certificates" classname="/frontend.tf.aws_acm_certificate.cloudfront" file="/frontend.tf"/>
+		<testcase name="[NONE][CKV_AWS_305] Ensure CloudFront distribution has a default root object configured" classname="/frontend.tf.aws_cloudfront_distribution.main" file="/frontend.tf"/>
+		<testcase name="[NONE][CKV_AWS_174] Verify CloudFront Distribution Viewer Certificate is using TLS v1.2 or higher" classname="/frontend.tf.aws_cloudfront_distribution.main" file="/frontend.tf"/>
+		<testcase name="[NONE][CKV_AWS_34] Ensure CloudFront distribution ViewerProtocolPolicy is set to HTTPS" classname="/frontend.tf.aws_cloudfront_distribution.main" file="/frontend.tf"/>
+		<testcase name="[NONE][CKV_AWS_68] CloudFront Distribution should have WAF enabled" classname="/frontend.tf.aws_cloudfront_distribution.main" file="/frontend.tf"/>
+		<testcase name="[NONE][CKV_AWS_216] Ensure CloudFront distribution is enabled" classname="/frontend.tf.aws_cloudfront_distribution.main" file="/frontend.tf"/>
+		<testcase name="[NONE][CKV_AWS_110] Ensure IAM policies does not allow privilege escalation" classname="/frontend.tf.aws_iam_policy_document.frontend_kms" file="/frontend.tf"/>
+		<testcase name="[NONE][CKV_AWS_358] Ensure AWS GitHub Actions OIDC authorization policies only allow safe claims and claim order" classname="/frontend.tf.aws_iam_policy_document.frontend_kms" file="/frontend.tf"/>
+		<testcase name="[NONE][CKV_AWS_107] Ensure IAM policies does not allow credentials exposure" classname="/frontend.tf.aws_iam_policy_document.frontend_kms" file="/frontend.tf"/>
+		<testcase name="[NONE][CKV_AWS_1] Ensure IAM policies that allow full &quot;*-*&quot; administrative privileges are not created" classname="/frontend.tf.aws_iam_policy_document.frontend_kms" file="/frontend.tf"/>
+		<testcase name="[NONE][CKV_AWS_283] Ensure no IAM policies documents allow ALL or any AWS principal permissions to the resource" classname="/frontend.tf.aws_iam_policy_document.frontend_kms" file="/frontend.tf"/>
+		<testcase name="[NONE][CKV_AWS_49] Ensure no IAM policies documents allow &quot;*&quot; as a statement's actions" classname="/frontend.tf.aws_iam_policy_document.frontend_kms" file="/frontend.tf"/>
+		<testcase name="[NONE][CKV_AWS_108] Ensure IAM policies does not allow data exfiltration" classname="/frontend.tf.aws_iam_policy_document.frontend_kms" file="/frontend.tf"/>
+		<testcase name="[NONE][CKV_AWS_110] Ensure IAM policies does not allow privilege escalation" classname="/frontend.tf.aws_iam_policy_document.frontend_bucket" file="/frontend.tf"/>
+		<testcase name="[NONE][CKV_AWS_358] Ensure AWS GitHub Actions OIDC authorization policies only allow safe claims and claim order" classname="/frontend.tf.aws_iam_policy_document.frontend_bucket" file="/frontend.tf"/>
+		<testcase name="[NONE][CKV_AWS_107] Ensure IAM policies does not allow credentials exposure" classname="/frontend.tf.aws_iam_policy_document.frontend_bucket" file="/frontend.tf"/>
+		<testcase name="[NONE][CKV_AWS_356] Ensure no IAM policies documents allow &quot;*&quot; as a statement's resource for restrictable actions" classname="/frontend.tf.aws_iam_policy_document.frontend_bucket" file="/frontend.tf"/>
+		<testcase name="[NONE][CKV_AWS_1] Ensure IAM policies that allow full &quot;*-*&quot; administrative privileges are not created" classname="/frontend.tf.aws_iam_policy_document.frontend_bucket" file="/frontend.tf"/>
+		<testcase name="[NONE][CKV_AWS_109] Ensure IAM policies does not allow permissions management / resource exposure without constraints" classname="/frontend.tf.aws_iam_policy_document.frontend_bucket" file="/frontend.tf"/>
+		<testcase name="[NONE][CKV_AWS_283] Ensure no IAM policies documents allow ALL or any AWS principal permissions to the resource" classname="/frontend.tf.aws_iam_policy_document.frontend_bucket" file="/frontend.tf"/>
+		<testcase name="[NONE][CKV_AWS_111] Ensure IAM policies does not allow write access without constraints" classname="/frontend.tf.aws_iam_policy_document.frontend_bucket" file="/frontend.tf"/>
+		<testcase name="[NONE][CKV_AWS_49] Ensure no IAM policies documents allow &quot;*&quot; as a statement's actions" classname="/frontend.tf.aws_iam_policy_document.frontend_bucket" file="/frontend.tf"/>
+		<testcase name="[NONE][CKV_AWS_108] Ensure IAM policies does not allow data exfiltration" classname="/frontend.tf.aws_iam_policy_document.frontend_bucket" file="/frontend.tf"/>
+		<testcase name="[NONE][CKV_AWS_274] Disallow IAM roles, users, and groups from using the AWS AdministratorAccess policy" classname="/iam.tf.aws_iam_role.ecs_task_execution" file="/iam.tf"/>
+		<testcase name="[NONE][CKV_AWS_60] Ensure IAM role allows only specific services or principals to assume it" classname="/iam.tf.aws_iam_role.ecs_task_execution" file="/iam.tf"/>
+		<testcase name="[NONE][CKV_AWS_393] Ensure AWS GitHub Actions OIDC authorization policies only allow safe claims and claim order on IAM role" classname="/iam.tf.aws_iam_role.ecs_task_execution" file="/iam.tf"/>
+		<testcase name="[NONE][CKV_AWS_61] Ensure AWS IAM policy does not allow assume role permission across all services" classname="/iam.tf.aws_iam_role.ecs_task_execution" file="/iam.tf"/>
+		<testcase name="[NONE][CKV_AWS_274] Disallow IAM roles, users, and groups from using the AWS AdministratorAccess policy" classname="/iam.tf.aws_iam_role_policy_attachment.ecs_task_execution_managed" file="/iam.tf"/>
+		<testcase name="[NONE][CKV_AWS_63] Ensure no IAM policies documents allow &quot;*&quot; as a statement's actions" classname="/iam.tf.aws_iam_role_policy.ecs_task_execution_extra" file="/iam.tf"/>
+		<testcase name="[NONE][CKV_AWS_62] Ensure IAM policies that allow full &quot;*-*&quot; administrative privileges are not created" classname="/iam.tf.aws_iam_role_policy.ecs_task_execution_extra" file="/iam.tf"/>
+		<testcase name="[NONE][CKV_AWS_274] Disallow IAM roles, users, and groups from using the AWS AdministratorAccess policy" classname="/iam.tf.aws_iam_role.svc_reservas_task" file="/iam.tf"/>
+		<testcase name="[NONE][CKV_AWS_60] Ensure IAM role allows only specific services or principals to assume it" classname="/iam.tf.aws_iam_role.svc_reservas_task" file="/iam.tf"/>
+		<testcase name="[NONE][CKV_AWS_393] Ensure AWS GitHub Actions OIDC authorization policies only allow safe claims and claim order on IAM role" classname="/iam.tf.aws_iam_role.svc_reservas_task" file="/iam.tf"/>
+		<testcase name="[NONE][CKV_AWS_61] Ensure AWS IAM policy does not allow assume role permission across all services" classname="/iam.tf.aws_iam_role.svc_reservas_task" file="/iam.tf"/>
+		<testcase name="[NONE][CKV_AWS_63] Ensure no IAM policies documents allow &quot;*&quot; as a statement's actions" classname="/iam.tf.aws_iam_role_policy.svc_reservas_task" file="/iam.tf"/>
+		<testcase name="[NONE][CKV_AWS_62] Ensure IAM policies that allow full &quot;*-*&quot; administrative privileges are not created" classname="/iam.tf.aws_iam_role_policy.svc_reservas_task" file="/iam.tf"/>
+		<testcase name="[NONE][CKV_AWS_274] Disallow IAM roles, users, and groups from using the AWS AdministratorAccess policy" classname="/iam.tf.aws_iam_role.svc_pagos_task" file="/iam.tf"/>
+		<testcase name="[NONE][CKV_AWS_60] Ensure IAM role allows only specific services or principals to assume it" classname="/iam.tf.aws_iam_role.svc_pagos_task" file="/iam.tf"/>
+		<testcase name="[NONE][CKV_AWS_393] Ensure AWS GitHub Actions OIDC authorization policies only allow safe claims and claim order on IAM role" classname="/iam.tf.aws_iam_role.svc_pagos_task" file="/iam.tf"/>
+		<testcase name="[NONE][CKV_AWS_61] Ensure AWS IAM policy does not allow assume role permission across all services" classname="/iam.tf.aws_iam_role.svc_pagos_task" file="/iam.tf"/>
+		<testcase name="[NONE][CKV_AWS_63] Ensure no IAM policies documents allow &quot;*&quot; as a statement's actions" classname="/iam.tf.aws_iam_role_policy.svc_pagos_task" file="/iam.tf"/>
+		<testcase name="[NONE][CKV_AWS_62] Ensure IAM policies that allow full &quot;*-*&quot; administrative privileges are not created" classname="/iam.tf.aws_iam_role_policy.svc_pagos_task" file="/iam.tf"/>
+		<testcase name="[NONE][CKV_AWS_110] Ensure IAM policies does not allow privilege escalation" classname="/iam.tf.aws_iam_policy_document.ecs_task_assume" file="/iam.tf"/>
+		<testcase name="[NONE][CKV_AWS_358] Ensure AWS GitHub Actions OIDC authorization policies only allow safe claims and claim order" classname="/iam.tf.aws_iam_policy_document.ecs_task_assume" file="/iam.tf"/>
+		<testcase name="[NONE][CKV_AWS_107] Ensure IAM policies does not allow credentials exposure" classname="/iam.tf.aws_iam_policy_document.ecs_task_assume" file="/iam.tf"/>
+		<testcase name="[NONE][CKV_AWS_356] Ensure no IAM policies documents allow &quot;*&quot; as a statement's resource for restrictable actions" classname="/iam.tf.aws_iam_policy_document.ecs_task_assume" file="/iam.tf"/>
+		<testcase name="[NONE][CKV_AWS_1] Ensure IAM policies that allow full &quot;*-*&quot; administrative privileges are not created" classname="/iam.tf.aws_iam_policy_document.ecs_task_assume" file="/iam.tf"/>
+		<testcase name="[NONE][CKV_AWS_109] Ensure IAM policies does not allow permissions management / resource exposure without constraints" classname="/iam.tf.aws_iam_policy_document.ecs_task_assume" file="/iam.tf"/>
+		<testcase name="[NONE][CKV_AWS_283] Ensure no IAM policies documents allow ALL or any AWS principal permissions to the resource" classname="/iam.tf.aws_iam_policy_document.ecs_task_assume" file="/iam.tf"/>
+		<testcase name="[NONE][CKV_AWS_111] Ensure IAM policies does not allow write access without constraints" classname="/iam.tf.aws_iam_policy_document.ecs_task_assume" file="/iam.tf"/>
+		<testcase name="[NONE][CKV_AWS_49] Ensure no IAM policies documents allow &quot;*&quot; as a statement's actions" classname="/iam.tf.aws_iam_policy_document.ecs_task_assume" file="/iam.tf"/>
+		<testcase name="[NONE][CKV_AWS_108] Ensure IAM policies does not allow data exfiltration" classname="/iam.tf.aws_iam_policy_document.ecs_task_assume" file="/iam.tf"/>
+		<testcase name="[NONE][CKV_AWS_110] Ensure IAM policies does not allow privilege escalation" classname="/iam.tf.aws_iam_policy_document.ecs_task_execution_extra" file="/iam.tf"/>
+		<testcase name="[NONE][CKV_AWS_358] Ensure AWS GitHub Actions OIDC authorization policies only allow safe claims and claim order" classname="/iam.tf.aws_iam_policy_document.ecs_task_execution_extra" file="/iam.tf"/>
+		<testcase name="[NONE][CKV_AWS_107] Ensure IAM policies does not allow credentials exposure" classname="/iam.tf.aws_iam_policy_document.ecs_task_execution_extra" file="/iam.tf"/>
+		<testcase name="[NONE][CKV_AWS_356] Ensure no IAM policies documents allow &quot;*&quot; as a statement's resource for restrictable actions" classname="/iam.tf.aws_iam_policy_document.ecs_task_execution_extra" file="/iam.tf"/>
+		<testcase name="[NONE][CKV_AWS_1] Ensure IAM policies that allow full &quot;*-*&quot; administrative privileges are not created" classname="/iam.tf.aws_iam_policy_document.ecs_task_execution_extra" file="/iam.tf"/>
+		<testcase name="[NONE][CKV_AWS_109] Ensure IAM policies does not allow permissions management / resource exposure without constraints" classname="/iam.tf.aws_iam_policy_document.ecs_task_execution_extra" file="/iam.tf"/>
+		<testcase name="[NONE][CKV_AWS_283] Ensure no IAM policies documents allow ALL or any AWS principal permissions to the resource" classname="/iam.tf.aws_iam_policy_document.ecs_task_execution_extra" file="/iam.tf"/>
+		<testcase name="[NONE][CKV_AWS_111] Ensure IAM policies does not allow write access without constraints" classname="/iam.tf.aws_iam_policy_document.ecs_task_execution_extra" file="/iam.tf"/>
+		<testcase name="[NONE][CKV_AWS_49] Ensure no IAM policies documents allow &quot;*&quot; as a statement's actions" classname="/iam.tf.aws_iam_policy_document.ecs_task_execution_extra" file="/iam.tf"/>
+		<testcase name="[NONE][CKV_AWS_108] Ensure IAM policies does not allow data exfiltration" classname="/iam.tf.aws_iam_policy_document.ecs_task_execution_extra" file="/iam.tf"/>
+		<testcase name="[NONE][CKV_AWS_110] Ensure IAM policies does not allow privilege escalation" classname="/iam.tf.aws_iam_policy_document.svc_reservas_task" file="/iam.tf"/>
+		<testcase name="[NONE][CKV_AWS_358] Ensure AWS GitHub Actions OIDC authorization policies only allow safe claims and claim order" classname="/iam.tf.aws_iam_policy_document.svc_reservas_task" file="/iam.tf"/>
+		<testcase name="[NONE][CKV_AWS_107] Ensure IAM policies does not allow credentials exposure" classname="/iam.tf.aws_iam_policy_document.svc_reservas_task" file="/iam.tf"/>
+		<testcase name="[NONE][CKV_AWS_356] Ensure no IAM policies documents allow &quot;*&quot; as a statement's resource for restrictable actions" classname="/iam.tf.aws_iam_policy_document.svc_reservas_task" file="/iam.tf"/>
+		<testcase name="[NONE][CKV_AWS_1] Ensure IAM policies that allow full &quot;*-*&quot; administrative privileges are not created" classname="/iam.tf.aws_iam_policy_document.svc_reservas_task" file="/iam.tf"/>
+		<testcase name="[NONE][CKV_AWS_109] Ensure IAM policies does not allow permissions management / resource exposure without constraints" classname="/iam.tf.aws_iam_policy_document.svc_reservas_task" file="/iam.tf"/>
+		<testcase name="[NONE][CKV_AWS_283] Ensure no IAM policies documents allow ALL or any AWS principal permissions to the resource" classname="/iam.tf.aws_iam_policy_document.svc_reservas_task" file="/iam.tf"/>
+		<testcase name="[NONE][CKV_AWS_111] Ensure IAM policies does not allow write access without constraints" classname="/iam.tf.aws_iam_policy_document.svc_reservas_task" file="/iam.tf"/>
+		<testcase name="[NONE][CKV_AWS_49] Ensure no IAM policies documents allow &quot;*&quot; as a statement's actions" classname="/iam.tf.aws_iam_policy_document.svc_reservas_task" file="/iam.tf"/>
+		<testcase name="[NONE][CKV_AWS_108] Ensure IAM policies does not allow data exfiltration" classname="/iam.tf.aws_iam_policy_document.svc_reservas_task" file="/iam.tf"/>
+		<testcase name="[NONE][CKV_AWS_110] Ensure IAM policies does not allow privilege escalation" classname="/iam.tf.aws_iam_policy_document.svc_pagos_task" file="/iam.tf"/>
+		<testcase name="[NONE][CKV_AWS_358] Ensure AWS GitHub Actions OIDC authorization policies only allow safe claims and claim order" classname="/iam.tf.aws_iam_policy_document.svc_pagos_task" file="/iam.tf"/>
+		<testcase name="[NONE][CKV_AWS_107] Ensure IAM policies does not allow credentials exposure" classname="/iam.tf.aws_iam_policy_document.svc_pagos_task" file="/iam.tf"/>
+		<testcase name="[NONE][CKV_AWS_356] Ensure no IAM policies documents allow &quot;*&quot; as a statement's resource for restrictable actions" classname="/iam.tf.aws_iam_policy_document.svc_pagos_task" file="/iam.tf"/>
+		<testcase name="[NONE][CKV_AWS_1] Ensure IAM policies that allow full &quot;*-*&quot; administrative privileges are not created" classname="/iam.tf.aws_iam_policy_document.svc_pagos_task" file="/iam.tf"/>
+		<testcase name="[NONE][CKV_AWS_109] Ensure IAM policies does not allow permissions management / resource exposure without constraints" classname="/iam.tf.aws_iam_policy_document.svc_pagos_task" file="/iam.tf"/>
+		<testcase name="[NONE][CKV_AWS_283] Ensure no IAM policies documents allow ALL or any AWS principal permissions to the resource" classname="/iam.tf.aws_iam_policy_document.svc_pagos_task" file="/iam.tf"/>
+		<testcase name="[NONE][CKV_AWS_111] Ensure IAM policies does not allow write access without constraints" classname="/iam.tf.aws_iam_policy_document.svc_pagos_task" file="/iam.tf"/>
+		<testcase name="[NONE][CKV_AWS_49] Ensure no IAM policies documents allow &quot;*&quot; as a statement's actions" classname="/iam.tf.aws_iam_policy_document.svc_pagos_task" file="/iam.tf"/>
+		<testcase name="[NONE][CKV_AWS_108] Ensure IAM policies does not allow data exfiltration" classname="/iam.tf.aws_iam_policy_document.svc_pagos_task" file="/iam.tf"/>
+		<testcase name="[NONE][CKV_AWS_227] Ensure KMS key is enabled" classname="/monitoring.tf.aws_kms_key.monitoring" file="/monitoring.tf"/>
+		<testcase name="[NONE][CKV_AWS_33] Ensure KMS key policy does not contain wildcard (*) principal" classname="/monitoring.tf.aws_kms_key.monitoring" file="/monitoring.tf"/>
+		<testcase name="[NONE][CKV_AWS_7] Ensure rotation for customer created CMKs is enabled" classname="/monitoring.tf.aws_kms_key.monitoring" file="/monitoring.tf"/>
+		<testcase name="[NONE][CKV_AWS_26] Ensure all data stored in the SNS topic is encrypted" classname="/monitoring.tf.aws_sns_topic.alerts" file="/monitoring.tf"/>
+		<testcase name="[NONE][CKV_AWS_319] Ensure that CloudWatch alarm actions are enabled" classname="/monitoring.tf.aws_cloudwatch_metric_alarm.alb_5xx_elb" file="/monitoring.tf"/>
+		<testcase name="[NONE][CKV_AWS_319] Ensure that CloudWatch alarm actions are enabled" classname="/monitoring.tf.aws_cloudwatch_metric_alarm.alb_5xx_target" file="/monitoring.tf"/>
+		<testcase name="[NONE][CKV_AWS_319] Ensure that CloudWatch alarm actions are enabled" classname="/monitoring.tf.aws_cloudwatch_metric_alarm.alb_latency_p99" file="/monitoring.tf"/>
+		<testcase name="[NONE][CKV_AWS_319] Ensure that CloudWatch alarm actions are enabled" classname="/monitoring.tf.aws_cloudwatch_metric_alarm.alb_unhealthy[&quot;pagos&quot;]" file="/monitoring.tf"/>
+		<testcase name="[NONE][CKV_AWS_319] Ensure that CloudWatch alarm actions are enabled" classname="/monitoring.tf.aws_cloudwatch_metric_alarm.ecs_cpu[&quot;pagos&quot;]" file="/monitoring.tf"/>
+		<testcase name="[NONE][CKV_AWS_319] Ensure that CloudWatch alarm actions are enabled" classname="/monitoring.tf.aws_cloudwatch_metric_alarm.ecs_memory[&quot;pagos&quot;]" file="/monitoring.tf"/>
+		<testcase name="[NONE][CKV_AWS_319] Ensure that CloudWatch alarm actions are enabled" classname="/monitoring.tf.aws_cloudwatch_metric_alarm.rds_cpu" file="/monitoring.tf"/>
+		<testcase name="[NONE][CKV_AWS_319] Ensure that CloudWatch alarm actions are enabled" classname="/monitoring.tf.aws_cloudwatch_metric_alarm.rds_free_storage" file="/monitoring.tf"/>
+		<testcase name="[NONE][CKV_AWS_319] Ensure that CloudWatch alarm actions are enabled" classname="/monitoring.tf.aws_cloudwatch_metric_alarm.rds_connections" file="/monitoring.tf"/>
+		<testcase name="[NONE][CKV_AWS_319] Ensure that CloudWatch alarm actions are enabled" classname="/monitoring.tf.aws_cloudwatch_metric_alarm.rds_freeable_memory" file="/monitoring.tf"/>
+		<testcase name="[NONE][CKV_AWS_319] Ensure that CloudWatch alarm actions are enabled" classname="/monitoring.tf.aws_cloudwatch_metric_alarm.apigw_5xx" file="/monitoring.tf"/>
+		<testcase name="[NONE][CKV_AWS_319] Ensure that CloudWatch alarm actions are enabled" classname="/monitoring.tf.aws_cloudwatch_metric_alarm.apigw_latency_p99" file="/monitoring.tf"/>
+		<testcase name="[NONE][CKV_AWS_319] Ensure that CloudWatch alarm actions are enabled" classname="/monitoring.tf.aws_cloudwatch_metric_alarm.alb_unhealthy[&quot;reservas&quot;]" file="/monitoring.tf"/>
+		<testcase name="[NONE][CKV_AWS_319] Ensure that CloudWatch alarm actions are enabled" classname="/monitoring.tf.aws_cloudwatch_metric_alarm.ecs_cpu[&quot;reservas&quot;]" file="/monitoring.tf"/>
+		<testcase name="[NONE][CKV_AWS_319] Ensure that CloudWatch alarm actions are enabled" classname="/monitoring.tf.aws_cloudwatch_metric_alarm.ecs_memory[&quot;reservas&quot;]" file="/monitoring.tf"/>
+		<testcase name="[NONE][CKV_AWS_110] Ensure IAM policies does not allow privilege escalation" classname="/monitoring.tf.aws_iam_policy_document.monitoring_kms" file="/monitoring.tf"/>
+		<testcase name="[NONE][CKV_AWS_358] Ensure AWS GitHub Actions OIDC authorization policies only allow safe claims and claim order" classname="/monitoring.tf.aws_iam_policy_document.monitoring_kms" file="/monitoring.tf"/>
+		<testcase name="[NONE][CKV_AWS_107] Ensure IAM policies does not allow credentials exposure" classname="/monitoring.tf.aws_iam_policy_document.monitoring_kms" file="/monitoring.tf"/>
+		<testcase name="[NONE][CKV_AWS_1] Ensure IAM policies that allow full &quot;*-*&quot; administrative privileges are not created" classname="/monitoring.tf.aws_iam_policy_document.monitoring_kms" file="/monitoring.tf"/>
+		<testcase name="[NONE][CKV_AWS_283] Ensure no IAM policies documents allow ALL or any AWS principal permissions to the resource" classname="/monitoring.tf.aws_iam_policy_document.monitoring_kms" file="/monitoring.tf"/>
+		<testcase name="[NONE][CKV_AWS_49] Ensure no IAM policies documents allow &quot;*&quot; as a statement's actions" classname="/monitoring.tf.aws_iam_policy_document.monitoring_kms" file="/monitoring.tf"/>
+		<testcase name="[NONE][CKV_AWS_108] Ensure IAM policies does not allow data exfiltration" classname="/monitoring.tf.aws_iam_policy_document.monitoring_kms" file="/monitoring.tf"/>
+		<testcase name="[NONE][CKV_AWS_110] Ensure IAM policies does not allow privilege escalation" classname="/monitoring.tf.aws_iam_policy_document.sns_alerts" file="/monitoring.tf"/>
+		<testcase name="[NONE][CKV_AWS_358] Ensure AWS GitHub Actions OIDC authorization policies only allow safe claims and claim order" classname="/monitoring.tf.aws_iam_policy_document.sns_alerts" file="/monitoring.tf"/>
+		<testcase name="[NONE][CKV_AWS_107] Ensure IAM policies does not allow credentials exposure" classname="/monitoring.tf.aws_iam_policy_document.sns_alerts" file="/monitoring.tf"/>
+		<testcase name="[NONE][CKV_AWS_356] Ensure no IAM policies documents allow &quot;*&quot; as a statement's resource for restrictable actions" classname="/monitoring.tf.aws_iam_policy_document.sns_alerts" file="/monitoring.tf"/>
+		<testcase name="[NONE][CKV_AWS_1] Ensure IAM policies that allow full &quot;*-*&quot; administrative privileges are not created" classname="/monitoring.tf.aws_iam_policy_document.sns_alerts" file="/monitoring.tf"/>
+		<testcase name="[NONE][CKV_AWS_109] Ensure IAM policies does not allow permissions management / resource exposure without constraints" classname="/monitoring.tf.aws_iam_policy_document.sns_alerts" file="/monitoring.tf"/>
+		<testcase name="[NONE][CKV_AWS_283] Ensure no IAM policies documents allow ALL or any AWS principal permissions to the resource" classname="/monitoring.tf.aws_iam_policy_document.sns_alerts" file="/monitoring.tf"/>
+		<testcase name="[NONE][CKV_AWS_111] Ensure IAM policies does not allow write access without constraints" classname="/monitoring.tf.aws_iam_policy_document.sns_alerts" file="/monitoring.tf"/>
+		<testcase name="[NONE][CKV_AWS_49] Ensure no IAM policies documents allow &quot;*&quot; as a statement's actions" classname="/monitoring.tf.aws_iam_policy_document.sns_alerts" file="/monitoring.tf"/>
+		<testcase name="[NONE][CKV_AWS_108] Ensure IAM policies does not allow data exfiltration" classname="/monitoring.tf.aws_iam_policy_document.sns_alerts" file="/monitoring.tf"/>
+		<testcase name="[NONE][CKV_AWS_41] Ensure no hard coded AWS access key and secret key exists in provider" classname="/providers.tf.aws.default" file="/providers.tf"/>
+		<testcase name="[NONE][CKV_AWS_41] Ensure no hard coded AWS access key and secret key exists in provider" classname="/providers.tf.aws.us_east_1" file="/providers.tf"/>
+		<testcase name="[NONE][CKV_AWS_227] Ensure KMS key is enabled" classname="/rds.tf.aws_kms_key.rds" file="/rds.tf"/>
+		<testcase name="[NONE][CKV_AWS_33] Ensure KMS key policy does not contain wildcard (*) principal" classname="/rds.tf.aws_kms_key.rds" file="/rds.tf"/>
+		<testcase name="[NONE][CKV_AWS_7] Ensure rotation for customer created CMKs is enabled" classname="/rds.tf.aws_kms_key.rds" file="/rds.tf"/>
+		<testcase name="[NONE][CKV_AWS_149] Ensure that Secrets Manager secret is encrypted using KMS CMK" classname="/rds.tf.aws_secretsmanager_secret.rds" file="/rds.tf"/>
+		<testcase name="[NONE][CKV_AWS_274] Disallow IAM roles, users, and groups from using the AWS AdministratorAccess policy" classname="/rds.tf.aws_iam_role.rds_enhanced_monitoring" file="/rds.tf"/>
+		<testcase name="[NONE][CKV_AWS_60] Ensure IAM role allows only specific services or principals to assume it" classname="/rds.tf.aws_iam_role.rds_enhanced_monitoring" file="/rds.tf"/>
+		<testcase name="[NONE][CKV_AWS_393] Ensure AWS GitHub Actions OIDC authorization policies only allow safe claims and claim order on IAM role" classname="/rds.tf.aws_iam_role.rds_enhanced_monitoring" file="/rds.tf"/>
+		<testcase name="[NONE][CKV_AWS_61] Ensure AWS IAM policy does not allow assume role permission across all services" classname="/rds.tf.aws_iam_role.rds_enhanced_monitoring" file="/rds.tf"/>
+		<testcase name="[NONE][CKV_AWS_274] Disallow IAM roles, users, and groups from using the AWS AdministratorAccess policy" classname="/rds.tf.aws_iam_role_policy_attachment.rds_enhanced_monitoring" file="/rds.tf"/>
+		<testcase name="[NONE][CKV_AWS_129] Ensure that respective logs of Amazon Relational Database Service (Amazon RDS) are enabled" classname="/rds.tf.aws_db_instance.main" file="/rds.tf"/>
+		<testcase name="[NONE][CKV_AWS_16] Ensure all data stored in the RDS is securely encrypted at rest" classname="/rds.tf.aws_db_instance.main" file="/rds.tf"/>
+		<testcase name="[NONE][CKV_AWS_226] Ensure DB instance gets all minor upgrades automatically" classname="/rds.tf.aws_db_instance.main" file="/rds.tf"/>
+		<testcase name="[NONE][CKV_AWS_354] Ensure RDS Performance Insights are encrypted using KMS CMKs" classname="/rds.tf.aws_db_instance.main" file="/rds.tf"/>
+		<testcase name="[NONE][CKV_AWS_157] Ensure that RDS instances have Multi-AZ enabled" classname="/rds.tf.aws_db_instance.main" file="/rds.tf"/>
+		<testcase name="[NONE][CKV_AWS_250] Ensure that RDS PostgreSQL instances use a non vulnerable version with the log_fdw extension (https://aws.amazon.com/security/security-bulletins/AWS-2022-004/)" classname="/rds.tf.aws_db_instance.main" file="/rds.tf"/>
+		<testcase name="[NONE][CKV_AWS_388] Ensure AWS Aurora PostgreSQL is not exposed to local file read vulnerability" classname="/rds.tf.aws_db_instance.main" file="/rds.tf"/>
+		<testcase name="[NONE][CKV_AWS_133] Ensure that RDS instances has backup policy" classname="/rds.tf.aws_db_instance.main" file="/rds.tf"/>
+		<testcase name="[NONE][CKV_AWS_211] Ensure RDS uses a modern CaCert" classname="/rds.tf.aws_db_instance.main" file="/rds.tf"/>
+		<testcase name="[NONE][CKV_AWS_118] Ensure that enhanced monitoring is enabled for Amazon RDS instances" classname="/rds.tf.aws_db_instance.main" file="/rds.tf"/>
+		<testcase name="[NONE][CKV_AWS_17] Ensure all data stored in RDS is not publicly accessible" classname="/rds.tf.aws_db_instance.main" file="/rds.tf"/>
+		<testcase name="[NONE][CKV_AWS_353] Ensure that RDS instances have performance insights enabled" classname="/rds.tf.aws_db_instance.main" file="/rds.tf"/>
+		<testcase name="[NONE][CKV_AWS_110] Ensure IAM policies does not allow privilege escalation" classname="/rds.tf.aws_iam_policy_document.rds_monitoring_assume" file="/rds.tf"/>
+		<testcase name="[NONE][CKV_AWS_358] Ensure AWS GitHub Actions OIDC authorization policies only allow safe claims and claim order" classname="/rds.tf.aws_iam_policy_document.rds_monitoring_assume" file="/rds.tf"/>
+		<testcase name="[NONE][CKV_AWS_107] Ensure IAM policies does not allow credentials exposure" classname="/rds.tf.aws_iam_policy_document.rds_monitoring_assume" file="/rds.tf"/>
+		<testcase name="[NONE][CKV_AWS_356] Ensure no IAM policies documents allow &quot;*&quot; as a statement's resource for restrictable actions" classname="/rds.tf.aws_iam_policy_document.rds_monitoring_assume" file="/rds.tf"/>
+		<testcase name="[NONE][CKV_AWS_1] Ensure IAM policies that allow full &quot;*-*&quot; administrative privileges are not created" classname="/rds.tf.aws_iam_policy_document.rds_monitoring_assume" file="/rds.tf"/>
+		<testcase name="[NONE][CKV_AWS_109] Ensure IAM policies does not allow permissions management / resource exposure without constraints" classname="/rds.tf.aws_iam_policy_document.rds_monitoring_assume" file="/rds.tf"/>
+		<testcase name="[NONE][CKV_AWS_283] Ensure no IAM policies documents allow ALL or any AWS principal permissions to the resource" classname="/rds.tf.aws_iam_policy_document.rds_monitoring_assume" file="/rds.tf"/>
+		<testcase name="[NONE][CKV_AWS_111] Ensure IAM policies does not allow write access without constraints" classname="/rds.tf.aws_iam_policy_document.rds_monitoring_assume" file="/rds.tf"/>
+		<testcase name="[NONE][CKV_AWS_49] Ensure no IAM policies documents allow &quot;*&quot; as a statement's actions" classname="/rds.tf.aws_iam_policy_document.rds_monitoring_assume" file="/rds.tf"/>
+		<testcase name="[NONE][CKV_AWS_108] Ensure IAM policies does not allow data exfiltration" classname="/rds.tf.aws_iam_policy_document.rds_monitoring_assume" file="/rds.tf"/>
+		<testcase name="[NONE][CKV_AWS_25] Ensure no security groups allow ingress from 0.0.0.0:0 to port 3389" classname="/security_groups.tf.aws_security_group.alb" file="/security_groups.tf"/>
+		<testcase name="[NONE][CKV_AWS_277] Ensure no security groups allow ingress from 0.0.0.0:0 to port -1" classname="/security_groups.tf.aws_security_group.alb" file="/security_groups.tf"/>
+		<testcase name="[NONE][CKV_AWS_260] Ensure no security groups allow ingress from 0.0.0.0:0 to port 80" classname="/security_groups.tf.aws_security_group.alb" file="/security_groups.tf"/>
+		<testcase name="[NONE][CKV_AWS_24] Ensure no security groups allow ingress from 0.0.0.0:0 to port 22" classname="/security_groups.tf.aws_security_group.alb" file="/security_groups.tf"/>
+		<testcase name="[NONE][CKV_AWS_382] Ensure no security groups allow egress from 0.0.0.0:0 to port -1" classname="/security_groups.tf.aws_security_group.alb" file="/security_groups.tf"/>
+		<testcase name="[NONE][CKV_AWS_23] Ensure every security group and rule has a description" classname="/security_groups.tf.aws_security_group.alb" file="/security_groups.tf"/>
+		<testcase name="[NONE][CKV_AWS_25] Ensure no security groups allow ingress from 0.0.0.0:0 to port 3389" classname="/security_groups.tf.aws_vpc_security_group_ingress_rule.alb_https" file="/security_groups.tf"/>
+		<testcase name="[NONE][CKV_AWS_277] Ensure no security groups allow ingress from 0.0.0.0:0 to port -1" classname="/security_groups.tf.aws_vpc_security_group_ingress_rule.alb_https" file="/security_groups.tf"/>
+		<testcase name="[NONE][CKV_AWS_260] Ensure no security groups allow ingress from 0.0.0.0:0 to port 80" classname="/security_groups.tf.aws_vpc_security_group_ingress_rule.alb_https" file="/security_groups.tf"/>
+		<testcase name="[NONE][CKV_AWS_24] Ensure no security groups allow ingress from 0.0.0.0:0 to port 22" classname="/security_groups.tf.aws_vpc_security_group_ingress_rule.alb_https" file="/security_groups.tf"/>
+		<testcase name="[NONE][CKV_AWS_23] Ensure every security group and rule has a description" classname="/security_groups.tf.aws_vpc_security_group_ingress_rule.alb_https" file="/security_groups.tf"/>
+		<testcase name="[NONE][CKV_AWS_25] Ensure no security groups allow ingress from 0.0.0.0:0 to port 3389" classname="/security_groups.tf.aws_vpc_security_group_ingress_rule.alb_http" file="/security_groups.tf"/>
+		<testcase name="[NONE][CKV_AWS_277] Ensure no security groups allow ingress from 0.0.0.0:0 to port -1" classname="/security_groups.tf.aws_vpc_security_group_ingress_rule.alb_http" file="/security_groups.tf"/>
+		<testcase name="[NONE][CKV_AWS_24] Ensure no security groups allow ingress from 0.0.0.0:0 to port 22" classname="/security_groups.tf.aws_vpc_security_group_ingress_rule.alb_http" file="/security_groups.tf"/>
+		<testcase name="[NONE][CKV_AWS_23] Ensure every security group and rule has a description" classname="/security_groups.tf.aws_vpc_security_group_ingress_rule.alb_http" file="/security_groups.tf"/>
+		<testcase name="[NONE][CKV_AWS_382] Ensure no security groups allow egress from 0.0.0.0:0 to port -1" classname="/security_groups.tf.aws_vpc_security_group_egress_rule.alb_to_ecs_reservas" file="/security_groups.tf"/>
+		<testcase name="[NONE][CKV_AWS_23] Ensure every security group and rule has a description" classname="/security_groups.tf.aws_vpc_security_group_egress_rule.alb_to_ecs_reservas" file="/security_groups.tf"/>
+		<testcase name="[NONE][CKV_AWS_382] Ensure no security groups allow egress from 0.0.0.0:0 to port -1" classname="/security_groups.tf.aws_vpc_security_group_egress_rule.alb_to_ecs_pagos" file="/security_groups.tf"/>
+		<testcase name="[NONE][CKV_AWS_23] Ensure every security group and rule has a description" classname="/security_groups.tf.aws_vpc_security_group_egress_rule.alb_to_ecs_pagos" file="/security_groups.tf"/>
+		<testcase name="[NONE][CKV_AWS_25] Ensure no security groups allow ingress from 0.0.0.0:0 to port 3389" classname="/security_groups.tf.aws_security_group.ecs" file="/security_groups.tf"/>
+		<testcase name="[NONE][CKV_AWS_277] Ensure no security groups allow ingress from 0.0.0.0:0 to port -1" classname="/security_groups.tf.aws_security_group.ecs" file="/security_groups.tf"/>
+		<testcase name="[NONE][CKV_AWS_260] Ensure no security groups allow ingress from 0.0.0.0:0 to port 80" classname="/security_groups.tf.aws_security_group.ecs" file="/security_groups.tf"/>
+		<testcase name="[NONE][CKV_AWS_24] Ensure no security groups allow ingress from 0.0.0.0:0 to port 22" classname="/security_groups.tf.aws_security_group.ecs" file="/security_groups.tf"/>
+		<testcase name="[NONE][CKV_AWS_382] Ensure no security groups allow egress from 0.0.0.0:0 to port -1" classname="/security_groups.tf.aws_security_group.ecs" file="/security_groups.tf"/>
+		<testcase name="[NONE][CKV_AWS_23] Ensure every security group and rule has a description" classname="/security_groups.tf.aws_security_group.ecs" file="/security_groups.tf"/>
+		<testcase name="[NONE][CKV_AWS_25] Ensure no security groups allow ingress from 0.0.0.0:0 to port 3389" classname="/security_groups.tf.aws_vpc_security_group_ingress_rule.ecs_reservas_from_alb" file="/security_groups.tf"/>
+		<testcase name="[NONE][CKV_AWS_277] Ensure no security groups allow ingress from 0.0.0.0:0 to port -1" classname="/security_groups.tf.aws_vpc_security_group_ingress_rule.ecs_reservas_from_alb" file="/security_groups.tf"/>
+		<testcase name="[NONE][CKV_AWS_260] Ensure no security groups allow ingress from 0.0.0.0:0 to port 80" classname="/security_groups.tf.aws_vpc_security_group_ingress_rule.ecs_reservas_from_alb" file="/security_groups.tf"/>
+		<testcase name="[NONE][CKV_AWS_24] Ensure no security groups allow ingress from 0.0.0.0:0 to port 22" classname="/security_groups.tf.aws_vpc_security_group_ingress_rule.ecs_reservas_from_alb" file="/security_groups.tf"/>
+		<testcase name="[NONE][CKV_AWS_23] Ensure every security group and rule has a description" classname="/security_groups.tf.aws_vpc_security_group_ingress_rule.ecs_reservas_from_alb" file="/security_groups.tf"/>
+		<testcase name="[NONE][CKV_AWS_25] Ensure no security groups allow ingress from 0.0.0.0:0 to port 3389" classname="/security_groups.tf.aws_vpc_security_group_ingress_rule.ecs_pagos_from_alb" file="/security_groups.tf"/>
+		<testcase name="[NONE][CKV_AWS_277] Ensure no security groups allow ingress from 0.0.0.0:0 to port -1" classname="/security_groups.tf.aws_vpc_security_group_ingress_rule.ecs_pagos_from_alb" file="/security_groups.tf"/>
+		<testcase name="[NONE][CKV_AWS_260] Ensure no security groups allow ingress from 0.0.0.0:0 to port 80" classname="/security_groups.tf.aws_vpc_security_group_ingress_rule.ecs_pagos_from_alb" file="/security_groups.tf"/>
+		<testcase name="[NONE][CKV_AWS_24] Ensure no security groups allow ingress from 0.0.0.0:0 to port 22" classname="/security_groups.tf.aws_vpc_security_group_ingress_rule.ecs_pagos_from_alb" file="/security_groups.tf"/>
+		<testcase name="[NONE][CKV_AWS_23] Ensure every security group and rule has a description" classname="/security_groups.tf.aws_vpc_security_group_ingress_rule.ecs_pagos_from_alb" file="/security_groups.tf"/>
+		<testcase name="[NONE][CKV_AWS_382] Ensure no security groups allow egress from 0.0.0.0:0 to port -1" classname="/security_groups.tf.aws_vpc_security_group_egress_rule.ecs_to_https" file="/security_groups.tf"/>
+		<testcase name="[NONE][CKV_AWS_23] Ensure every security group and rule has a description" classname="/security_groups.tf.aws_vpc_security_group_egress_rule.ecs_to_https" file="/security_groups.tf"/>
+		<testcase name="[NONE][CKV_AWS_382] Ensure no security groups allow egress from 0.0.0.0:0 to port -1" classname="/security_groups.tf.aws_vpc_security_group_egress_rule.ecs_to_rds" file="/security_groups.tf"/>
+		<testcase name="[NONE][CKV_AWS_23] Ensure every security group and rule has a description" classname="/security_groups.tf.aws_vpc_security_group_egress_rule.ecs_to_rds" file="/security_groups.tf"/>
+		<testcase name="[NONE][CKV_AWS_25] Ensure no security groups allow ingress from 0.0.0.0:0 to port 3389" classname="/security_groups.tf.aws_security_group.rds" file="/security_groups.tf"/>
+		<testcase name="[NONE][CKV_AWS_277] Ensure no security groups allow ingress from 0.0.0.0:0 to port -1" classname="/security_groups.tf.aws_security_group.rds" file="/security_groups.tf"/>
+		<testcase name="[NONE][CKV_AWS_260] Ensure no security groups allow ingress from 0.0.0.0:0 to port 80" classname="/security_groups.tf.aws_security_group.rds" file="/security_groups.tf"/>
+		<testcase name="[NONE][CKV_AWS_24] Ensure no security groups allow ingress from 0.0.0.0:0 to port 22" classname="/security_groups.tf.aws_security_group.rds" file="/security_groups.tf"/>
+		<testcase name="[NONE][CKV_AWS_382] Ensure no security groups allow egress from 0.0.0.0:0 to port -1" classname="/security_groups.tf.aws_security_group.rds" file="/security_groups.tf"/>
+		<testcase name="[NONE][CKV_AWS_23] Ensure every security group and rule has a description" classname="/security_groups.tf.aws_security_group.rds" file="/security_groups.tf"/>
+		<testcase name="[NONE][CKV_AWS_25] Ensure no security groups allow ingress from 0.0.0.0:0 to port 3389" classname="/security_groups.tf.aws_vpc_security_group_ingress_rule.rds_from_ecs" file="/security_groups.tf"/>
+		<testcase name="[NONE][CKV_AWS_277] Ensure no security groups allow ingress from 0.0.0.0:0 to port -1" classname="/security_groups.tf.aws_vpc_security_group_ingress_rule.rds_from_ecs" file="/security_groups.tf"/>
+		<testcase name="[NONE][CKV_AWS_260] Ensure no security groups allow ingress from 0.0.0.0:0 to port 80" classname="/security_groups.tf.aws_vpc_security_group_ingress_rule.rds_from_ecs" file="/security_groups.tf"/>
+		<testcase name="[NONE][CKV_AWS_24] Ensure no security groups allow ingress from 0.0.0.0:0 to port 22" classname="/security_groups.tf.aws_vpc_security_group_ingress_rule.rds_from_ecs" file="/security_groups.tf"/>
+		<testcase name="[NONE][CKV_AWS_23] Ensure every security group and rule has a description" classname="/security_groups.tf.aws_vpc_security_group_ingress_rule.rds_from_ecs" file="/security_groups.tf"/>
+		<testcase name="[NONE][CKV_AWS_25] Ensure no security groups allow ingress from 0.0.0.0:0 to port 3389" classname="/security_groups.tf.aws_security_group.vpc_endpoints" file="/security_groups.tf"/>
+		<testcase name="[NONE][CKV_AWS_277] Ensure no security groups allow ingress from 0.0.0.0:0 to port -1" classname="/security_groups.tf.aws_security_group.vpc_endpoints" file="/security_groups.tf"/>
+		<testcase name="[NONE][CKV_AWS_260] Ensure no security groups allow ingress from 0.0.0.0:0 to port 80" classname="/security_groups.tf.aws_security_group.vpc_endpoints" file="/security_groups.tf"/>
+		<testcase name="[NONE][CKV_AWS_24] Ensure no security groups allow ingress from 0.0.0.0:0 to port 22" classname="/security_groups.tf.aws_security_group.vpc_endpoints" file="/security_groups.tf"/>
+		<testcase name="[NONE][CKV_AWS_382] Ensure no security groups allow egress from 0.0.0.0:0 to port -1" classname="/security_groups.tf.aws_security_group.vpc_endpoints" file="/security_groups.tf"/>
+		<testcase name="[NONE][CKV_AWS_23] Ensure every security group and rule has a description" classname="/security_groups.tf.aws_security_group.vpc_endpoints" file="/security_groups.tf"/>
+		<testcase name="[NONE][CKV_AWS_25] Ensure no security groups allow ingress from 0.0.0.0:0 to port 3389" classname="/security_groups.tf.aws_vpc_security_group_ingress_rule.vpc_endpoints_from_ecs" file="/security_groups.tf"/>
+		<testcase name="[NONE][CKV_AWS_277] Ensure no security groups allow ingress from 0.0.0.0:0 to port -1" classname="/security_groups.tf.aws_vpc_security_group_ingress_rule.vpc_endpoints_from_ecs" file="/security_groups.tf"/>
+		<testcase name="[NONE][CKV_AWS_260] Ensure no security groups allow ingress from 0.0.0.0:0 to port 80" classname="/security_groups.tf.aws_vpc_security_group_ingress_rule.vpc_endpoints_from_ecs" file="/security_groups.tf"/>
+		<testcase name="[NONE][CKV_AWS_24] Ensure no security groups allow ingress from 0.0.0.0:0 to port 22" classname="/security_groups.tf.aws_vpc_security_group_ingress_rule.vpc_endpoints_from_ecs" file="/security_groups.tf"/>
+		<testcase name="[NONE][CKV_AWS_23] Ensure every security group and rule has a description" classname="/security_groups.tf.aws_vpc_security_group_ingress_rule.vpc_endpoints_from_ecs" file="/security_groups.tf"/>
+		<testcase name="[NONE][CKV_AWS_130] Ensure VPC subnets do not assign public IP by default" classname="/vpc.tf.aws_subnet.private[0]" file="/vpc.tf"/>
+		<testcase name="[NONE][CKV_AWS_130] Ensure VPC subnets do not assign public IP by default" classname="/vpc.tf.aws_subnet.private[1]" file="/vpc.tf"/>
+		<testcase name="[NONE][CKV2_AWS_44] Ensure AWS route table with VPC peering does not contain routes overly permissive to all traffic" classname="/vpc.tf.aws_route_table.public" file="/vpc.tf"/>
+		<testcase name="[NONE][CKV2_AWS_44] Ensure AWS route table with VPC peering does not contain routes overly permissive to all traffic" classname="/vpc.tf.aws_route_table.private[0]" file="/vpc.tf"/>
+		<testcase name="[NONE][CKV2_AWS_44] Ensure AWS route table with VPC peering does not contain routes overly permissive to all traffic" classname="/vpc.tf.aws_route_table.private[1]" file="/vpc.tf"/>
+		<testcase name="[NONE][CKV2_AWS_77] Ensure AWS API Gateway Rest API attached WAFv2 WebACL is configured with AMR for Log4j Vulnerability" classname="/api_gateway.tf.aws_apigatewayv2_api.main" file="/api_gateway.tf"/>
+		<testcase name="[NONE][CKV2_AWS_72] Ensure AWS CloudFront origin protocol policy enforces HTTPS-only" classname="/frontend.tf.aws_cloudfront_distribution.main" file="/frontend.tf"/>
+		<testcase name="[NONE][CKV_AWS_57] S3 Bucket has an ACL defined which allows public WRITE access." classname="/frontend.tf.aws_s3_bucket.frontend" file="/frontend.tf"/>
+		<testcase name="[NONE][CKV_AWS_103] Ensure that load balancer is using at least TLS 1.2" classname="/alb.tf.aws_lb_listener.https" file="/alb.tf"/>
+		<testcase name="[NONE][CKV_AWS_103] Ensure that load balancer is using at least TLS 1.2" classname="/alb.tf.aws_lb_listener.http" file="/alb.tf"/>
+		<testcase name="[NONE][CKV2_AWS_51] Ensure AWS API Gateway endpoints uses client certificate authentication" classname="/api_gateway.tf.aws_apigatewayv2_stage.default" file="/api_gateway.tf"/>
+		<testcase name="[NONE][CKV2_AWS_19] Ensure that all EIP addresses allocated to a VPC are attached to EC2 instances" classname="/vpc.tf.aws_eip.nat[0]" file="/vpc.tf"/>
+		<testcase name="[NONE][CKV2_AWS_19] Ensure that all EIP addresses allocated to a VPC are attached to EC2 instances" classname="/vpc.tf.aws_eip.nat[1]" file="/vpc.tf"/>
+		<testcase name="[NONE][CKV2_AWS_64] Ensure KMS key Policy is defined" classname="/ecs.tf.aws_kms_key.ecs_logs" file="/ecs.tf"/>
+		<testcase name="[NONE][CKV2_AWS_64] Ensure KMS key Policy is defined" classname="/monitoring.tf.aws_kms_key.monitoring" file="/monitoring.tf"/>
+		<testcase name="[NONE][CKV2_AWS_64] Ensure KMS key Policy is defined" classname="/frontend.tf.aws_kms_key.frontend" file="/frontend.tf"/>
+		<testcase name="[NONE][CKV2_AWS_61] Ensure that an S3 bucket has a lifecycle configuration" classname="/frontend.tf.aws_s3_bucket.frontend" file="/frontend.tf"/>
+		<testcase name="[NONE][CKV2_AWS_54] Ensure AWS CloudFront distribution is using secure SSL protocols for HTTPS communication" classname="/frontend.tf.aws_cloudfront_distribution.main" file="/frontend.tf"/>
+		<testcase name="[NONE][CKV2_AWS_42] Ensure AWS CloudFront distribution uses custom SSL certificate" classname="/frontend.tf.aws_cloudfront_distribution.main" file="/frontend.tf"/>
+		<testcase name="[NONE][CKV2_AWS_60] Ensure RDS instance with copy tags to snapshots is enabled" classname="/rds.tf.aws_db_instance.main" file="/rds.tf"/>
+		<testcase name="[NONE][CKV2_AWS_71] Ensure AWS ACM Certificate domain name does not include wildcards" classname="/alb.tf.aws_acm_certificate.main" file="/alb.tf"/>
+		<testcase name="[NONE][CKV2_AWS_71] Ensure AWS ACM Certificate domain name does not include wildcards" classname="/frontend.tf.aws_acm_certificate.cloudfront" file="/frontend.tf"/>
+		<testcase name="[NONE][CKV2_AWS_6] Ensure that S3 bucket has a Public Access block" classname="/frontend.tf.aws_s3_bucket.frontend" file="/frontend.tf"/>
+		<testcase name="[NONE][CKV2_AWS_30] Ensure Postgres RDS as aws_db_instance has Query Logging enabled" classname="/rds.tf.aws_db_instance.main" file="/rds.tf"/>
+		<testcase name="[NONE][CKV_AWS_21] Ensure all data stored in the S3 bucket have versioning enabled" classname="/frontend.tf.aws_s3_bucket.frontend" file="/frontend.tf"/>
+		<testcase name="[NONE][CKV_AWS_20] S3 Bucket has an ACL defined which allows public READ access." classname="/frontend.tf.aws_s3_bucket.frontend" file="/frontend.tf"/>
+		<testcase name="[NONE][CKV_AWS_145] Ensure that S3 buckets are encrypted with KMS by default" classname="/frontend.tf.aws_s3_bucket.frontend" file="/frontend.tf"/>
+		<testcase name="[NONE][CKV2_AWS_5] Ensure that Security Groups are attached to another resource" classname="/security_groups.tf.aws_security_group.alb" file="/security_groups.tf"/>
+		<testcase name="[NONE][CKV2_AWS_5] Ensure that Security Groups are attached to another resource" classname="/security_groups.tf.aws_security_group.ecs" file="/security_groups.tf"/>
+		<testcase name="[NONE][CKV2_AWS_5] Ensure that Security Groups are attached to another resource" classname="/security_groups.tf.aws_security_group.rds" file="/security_groups.tf"/>
+		<testcase name="[NONE][CKV2_AWS_5] Ensure that Security Groups are attached to another resource" classname="/security_groups.tf.aws_security_group.vpc_endpoints" file="/security_groups.tf"/>
+		<testcase name="[NONE][CKV_AWS_19] Ensure all data stored in the S3 bucket is securely encrypted at rest" classname="/frontend.tf.aws_s3_bucket.frontend" file="/frontend.tf"/>
+		<testcase name="[NONE][CKV2_AWS_56] Ensure AWS Managed IAMFullAccess IAM policy is not used." classname="/iam.tf.aws_iam_role.ecs_task_execution" file="/iam.tf"/>
+		<testcase name="[NONE][CKV2_AWS_56] Ensure AWS Managed IAMFullAccess IAM policy is not used." classname="/iam.tf.aws_iam_role.svc_reservas_task" file="/iam.tf"/>
+		<testcase name="[NONE][CKV2_AWS_56] Ensure AWS Managed IAMFullAccess IAM policy is not used." classname="/iam.tf.aws_iam_role.svc_pagos_task" file="/iam.tf"/>
+		<testcase name="[NONE][CKV2_AWS_56] Ensure AWS Managed IAMFullAccess IAM policy is not used." classname="/rds.tf.aws_iam_role.rds_enhanced_monitoring" file="/rds.tf"/>
+		<testcase name="[NONE][CKV2_AWS_65] Ensure access control lists for S3 buckets are disabled" classname="/frontend.tf.aws_s3_bucket_ownership_controls.frontend" file="/frontend.tf"/>
+		<testcase name="[NONE][CKV2_AWS_20] Ensure that ALB redirects HTTP requests into HTTPS ones" classname="/alb.tf.aws_lb.main" file="/alb.tf"/>
+		<testcase name="[NONE][CKV2_AWS_69] Ensure AWS RDS database instance configured with encryption in transit" classname="/rds.tf.aws_db_instance.main" file="/rds.tf"/>
+		<testcase name="[NONE][CKV2_AWS_74] Ensure AWS Load Balancers use strong ciphers" classname="/alb.tf.aws_lb_listener.http" file="/alb.tf"/>
+		<testcase name="[NONE][CKV2_AWS_74] Ensure AWS Load Balancers use strong ciphers" classname="/alb.tf.aws_lb_listener.https" file="/alb.tf"/>
+		<testcase name="[NONE][CKV2_AWS_46] Ensure AWS CloudFront Distribution with S3 have Origin Access set to enabled" classname="/frontend.tf.aws_cloudfront_distribution.main" file="/frontend.tf"/>
+		<testcase name="[NONE][CKV2_AWS_23] Route53 A Record has Attached Resource" classname="/route53.tf.aws_route53_record.cloudfront[&quot;apex_A&quot;]" file="/route53.tf"/>
+		<testcase name="[NONE][CKV2_AWS_23] Route53 A Record has Attached Resource" classname="/route53.tf.aws_route53_record.api_gateway" file="/route53.tf"/>
+		<testcase name="[NONE][CKV2_AWS_23] Route53 A Record has Attached Resource" classname="/route53.tf.aws_route53_record.cloudfront[&quot;www_A&quot;]" file="/route53.tf"/>
+		<testcase name="[NONE][CKV2_AWS_76] Ensure AWS ALB attached WAFv2 WebACL is configured with AMR for Log4j Vulnerability" classname="/alb.tf.aws_lb.main" file="/alb.tf"/>
+		<testcase name="[NONE][CKV2_AWS_40] Ensure AWS IAM policy does not allow full IAM privileges" classname="/ecs.tf.aws_iam_policy_document.ecs_logs_kms" file="/ecs.tf"/>
+		<testcase name="[NONE][CKV2_AWS_40] Ensure AWS IAM policy does not allow full IAM privileges" classname="/frontend.tf.aws_iam_policy_document.frontend_kms" file="/frontend.tf"/>
+		<testcase name="[NONE][CKV2_AWS_40] Ensure AWS IAM policy does not allow full IAM privileges" classname="/frontend.tf.aws_iam_policy_document.frontend_bucket" file="/frontend.tf"/>
+		<testcase name="[NONE][CKV2_AWS_40] Ensure AWS IAM policy does not allow full IAM privileges" classname="/iam.tf.aws_iam_policy_document.ecs_task_assume" file="/iam.tf"/>
+		<testcase name="[NONE][CKV2_AWS_40] Ensure AWS IAM policy does not allow full IAM privileges" classname="/iam.tf.aws_iam_policy_document.ecs_task_execution_extra" file="/iam.tf"/>
+		<testcase name="[NONE][CKV2_AWS_40] Ensure AWS IAM policy does not allow full IAM privileges" classname="/iam.tf.aws_iam_policy_document.svc_reservas_task" file="/iam.tf"/>
+		<testcase name="[NONE][CKV2_AWS_40] Ensure AWS IAM policy does not allow full IAM privileges" classname="/iam.tf.aws_iam_policy_document.svc_pagos_task" file="/iam.tf"/>
+		<testcase name="[NONE][CKV2_AWS_40] Ensure AWS IAM policy does not allow full IAM privileges" classname="/monitoring.tf.aws_iam_policy_document.monitoring_kms" file="/monitoring.tf"/>
+		<testcase name="[NONE][CKV2_AWS_40] Ensure AWS IAM policy does not allow full IAM privileges" classname="/monitoring.tf.aws_iam_policy_document.sns_alerts" file="/monitoring.tf"/>
+		<testcase name="[NONE][CKV2_AWS_40] Ensure AWS IAM policy does not allow full IAM privileges" classname="/rds.tf.aws_iam_policy_document.rds_monitoring_assume" file="/rds.tf"/>
+		<testcase name="[NONE][CKV2_AWS_35] AWS NAT Gateways should be utilized for the default route" classname="/vpc.tf.aws_route_table.public" file="/vpc.tf"/>
+		<testcase name="[NONE][CKV2_AWS_35] AWS NAT Gateways should be utilized for the default route" classname="/vpc.tf.aws_route_table.private[0]" file="/vpc.tf"/>
+		<testcase name="[NONE][CKV2_AWS_35] AWS NAT Gateways should be utilized for the default route" classname="/vpc.tf.aws_route_table.private[1]" file="/vpc.tf"/>
+		<testcase name="[NONE][CKV2_AWS_12] Ensure the default security group of every VPC restricts all traffic" classname="/vpc.tf.aws_vpc.main" file="/vpc.tf"/>
+		<testcase name="[NONE][CKV_AWS_131] Ensure that ALB drops HTTP headers" classname="/alb.tf.aws_lb.main" file="/alb.tf">
+			<failure type="failure" message="Ensure that ALB drops HTTP headers">
+Resource: aws_lb.main
+File: /alb.tf: 45-66
+Guideline: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-networking-policies/ensure-that-alb-drops-http-headers
+
+		45 | resource &quot;aws_lb&quot; &quot;main&quot; {
+		46 |   name               = &quot;${var.project}-${var.environment}-alb&quot;
+		47 |   internal           = false
+		48 |   load_balancer_type = &quot;application&quot;
+		49 |   security_groups    = [aws_security_group.alb.id]
+		50 |   subnets            = aws_subnet.public[*].id
+		51 | 
+		52 |   enable_deletion_protection = true
+		53 | 
+		54 |   dynamic &quot;access_logs&quot; {
+		55 |     for_each = var.alb_access_logs_bucket != &quot;&quot; ? [1] : []
+		56 |     content {
+		57 |       bucket  = var.alb_access_logs_bucket
+		58 |       prefix  = &quot;${var.project}/${var.environment}/alb&quot;
+		59 |       enabled = true
+		60 |     }
+		61 |   }
+		62 | 
+		63 |   tags = {
+		64 |     Name = &quot;${var.project}-${var.environment}-alb&quot;
+		65 |   }
+		66 | }
+</failure>
+		</testcase>
+		<testcase name="[NONE][CKV_AWS_338] Ensure CloudWatch log groups retains logs for at least 1 year" classname="/api_gateway.tf.aws_cloudwatch_log_group.api_gateway" file="/api_gateway.tf">
+			<failure type="failure" message="Ensure CloudWatch log groups retains logs for at least 1 year">
+Resource: aws_cloudwatch_log_group.api_gateway
+File: /api_gateway.tf: 4-10
+Guideline: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-logging-policies/bc-aws-338
+
+		4  | resource &quot;aws_cloudwatch_log_group&quot; &quot;api_gateway&quot; {
+		5  |   name              = &quot;/aws/apigateway/${var.project}-${var.environment}&quot;
+		6  |   retention_in_days = var.ecs_log_retention_days
+		7  |   kms_key_id        = aws_kms_key.ecs_logs.arn
+		8  | 
+		9  |   tags = { Name = &quot;${var.project}-${var.environment}-apigw-logs&quot; }
+		10 | }
+</failure>
+		</testcase>
+		<testcase name="[NONE][CKV_AWS_338] Ensure CloudWatch log groups retains logs for at least 1 year" classname="/ecs.tf.aws_cloudwatch_log_group.svc_reservas" file="/ecs.tf">
+			<failure type="failure" message="Ensure CloudWatch log groups retains logs for at least 1 year">
+Resource: aws_cloudwatch_log_group.svc_reservas
+File: /ecs.tf: 55-61
+Guideline: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-logging-policies/bc-aws-338
+
+		55 | resource &quot;aws_cloudwatch_log_group&quot; &quot;svc_reservas&quot; {
+		56 |   name              = &quot;/ecs/${var.project}-${var.environment}/svc-reservas&quot;
+		57 |   retention_in_days = var.ecs_log_retention_days
+		58 |   kms_key_id        = aws_kms_key.ecs_logs.arn
+		59 | 
+		60 |   tags = { Service = &quot;svc-reservas&quot; }
+		61 | }
+</failure>
+		</testcase>
+		<testcase name="[NONE][CKV_AWS_338] Ensure CloudWatch log groups retains logs for at least 1 year" classname="/ecs.tf.aws_cloudwatch_log_group.svc_pagos" file="/ecs.tf">
+			<failure type="failure" message="Ensure CloudWatch log groups retains logs for at least 1 year">
+Resource: aws_cloudwatch_log_group.svc_pagos
+File: /ecs.tf: 63-69
+Guideline: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-logging-policies/bc-aws-338
+
+		63 | resource &quot;aws_cloudwatch_log_group&quot; &quot;svc_pagos&quot; {
+		64 |   name              = &quot;/ecs/${var.project}-${var.environment}/svc-pagos&quot;
+		65 |   retention_in_days = var.ecs_log_retention_days
+		66 |   kms_key_id        = aws_kms_key.ecs_logs.arn
+		67 | 
+		68 |   tags = { Service = &quot;svc-pagos&quot; }
+		69 | }
+</failure>
+		</testcase>
+		<testcase name="[NONE][CKV_AWS_356] Ensure no IAM policies documents allow &quot;*&quot; as a statement's resource for restrictable actions" classname="/ecs.tf.aws_iam_policy_document.ecs_logs_kms" file="/ecs.tf">
+			<failure type="failure" message="Ensure no IAM policies documents allow &quot;*&quot; as a statement's resource for restrictable actions">
+Resource: aws_iam_policy_document.ecs_logs_kms
+File: /ecs.tf: 4-37
+Guideline: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-iam-policies/bc-aws-356
+
+		4  | data &quot;aws_iam_policy_document&quot; &quot;ecs_logs_kms&quot; {
+		5  |   statement {
+		6  |     sid     = &quot;RootAccess&quot;
+		7  |     effect  = &quot;Allow&quot;
+		8  |     actions = [&quot;kms:*&quot;]
+		9  |     principals {
+		10 |       type        = &quot;AWS&quot;
+		11 |       identifiers = [&quot;arn:${data.aws_partition.current.partition}:iam::${data.aws_caller_identity.current.account_id}:root&quot;]
+		12 |     }
+		13 |     resources = [&quot;*&quot;]
+		14 |   }
+		15 | 
+		16 |   statement {
+		17 |     sid    = &quot;AllowCloudWatchLogs&quot;
+		18 |     effect = &quot;Allow&quot;
+		19 |     actions = [
+		20 |       &quot;kms:Encrypt*&quot;,
+		21 |       &quot;kms:Decrypt*&quot;,
+		22 |       &quot;kms:ReEncrypt*&quot;,
+		23 |       &quot;kms:GenerateDataKey*&quot;,
+		24 |       &quot;kms:Describe*&quot;,
+		25 |     ]
+		26 |     principals {
+		27 |       type        = &quot;Service&quot;
+		28 |       identifiers = [&quot;logs.${var.aws_region}.amazonaws.com&quot;]
+		29 |     }
+		30 |     resources = [&quot;*&quot;]
+		31 |     condition {
+		32 |       test     = &quot;ArnLike&quot;
+		33 |       variable = &quot;kms:EncryptionContext:aws:logs:arn&quot;
+		34 |       values   = [&quot;arn:${data.aws_partition.current.partition}:logs:${var.aws_region}:${data.aws_caller_identity.current.account_id}:*&quot;]
+		35 |     }
+		36 |   }
+		37 | }
+</failure>
+		</testcase>
+		<testcase name="[NONE][CKV_AWS_109] Ensure IAM policies does not allow permissions management / resource exposure without constraints" classname="/ecs.tf.aws_iam_policy_document.ecs_logs_kms" file="/ecs.tf">
+			<failure type="failure" message="Ensure IAM policies does not allow permissions management / resource exposure without constraints">
+Resource: aws_iam_policy_document.ecs_logs_kms
+File: /ecs.tf: 4-37
+Guideline: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-iam-policies/ensure-iam-policies-do-not-allow-permissions-management-resource-exposure-without-constraint
+
+		4  | data &quot;aws_iam_policy_document&quot; &quot;ecs_logs_kms&quot; {
+		5  |   statement {
+		6  |     sid     = &quot;RootAccess&quot;
+		7  |     effect  = &quot;Allow&quot;
+		8  |     actions = [&quot;kms:*&quot;]
+		9  |     principals {
+		10 |       type        = &quot;AWS&quot;
+		11 |       identifiers = [&quot;arn:${data.aws_partition.current.partition}:iam::${data.aws_caller_identity.current.account_id}:root&quot;]
+		12 |     }
+		13 |     resources = [&quot;*&quot;]
+		14 |   }
+		15 | 
+		16 |   statement {
+		17 |     sid    = &quot;AllowCloudWatchLogs&quot;
+		18 |     effect = &quot;Allow&quot;
+		19 |     actions = [
+		20 |       &quot;kms:Encrypt*&quot;,
+		21 |       &quot;kms:Decrypt*&quot;,
+		22 |       &quot;kms:ReEncrypt*&quot;,
+		23 |       &quot;kms:GenerateDataKey*&quot;,
+		24 |       &quot;kms:Describe*&quot;,
+		25 |     ]
+		26 |     principals {
+		27 |       type        = &quot;Service&quot;
+		28 |       identifiers = [&quot;logs.${var.aws_region}.amazonaws.com&quot;]
+		29 |     }
+		30 |     resources = [&quot;*&quot;]
+		31 |     condition {
+		32 |       test     = &quot;ArnLike&quot;
+		33 |       variable = &quot;kms:EncryptionContext:aws:logs:arn&quot;
+		34 |       values   = [&quot;arn:${data.aws_partition.current.partition}:logs:${var.aws_region}:${data.aws_caller_identity.current.account_id}:*&quot;]
+		35 |     }
+		36 |   }
+		37 | }
+</failure>
+		</testcase>
+		<testcase name="[NONE][CKV_AWS_111] Ensure IAM policies does not allow write access without constraints" classname="/ecs.tf.aws_iam_policy_document.ecs_logs_kms" file="/ecs.tf">
+			<failure type="failure" message="Ensure IAM policies does not allow write access without constraints">
+Resource: aws_iam_policy_document.ecs_logs_kms
+File: /ecs.tf: 4-37
+Guideline: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-iam-policies/ensure-iam-policies-do-not-allow-write-access-without-constraint
+
+		4  | data &quot;aws_iam_policy_document&quot; &quot;ecs_logs_kms&quot; {
+		5  |   statement {
+		6  |     sid     = &quot;RootAccess&quot;
+		7  |     effect  = &quot;Allow&quot;
+		8  |     actions = [&quot;kms:*&quot;]
+		9  |     principals {
+		10 |       type        = &quot;AWS&quot;
+		11 |       identifiers = [&quot;arn:${data.aws_partition.current.partition}:iam::${data.aws_caller_identity.current.account_id}:root&quot;]
+		12 |     }
+		13 |     resources = [&quot;*&quot;]
+		14 |   }
+		15 | 
+		16 |   statement {
+		17 |     sid    = &quot;AllowCloudWatchLogs&quot;
+		18 |     effect = &quot;Allow&quot;
+		19 |     actions = [
+		20 |       &quot;kms:Encrypt*&quot;,
+		21 |       &quot;kms:Decrypt*&quot;,
+		22 |       &quot;kms:ReEncrypt*&quot;,
+		23 |       &quot;kms:GenerateDataKey*&quot;,
+		24 |       &quot;kms:Describe*&quot;,
+		25 |     ]
+		26 |     principals {
+		27 |       type        = &quot;Service&quot;
+		28 |       identifiers = [&quot;logs.${var.aws_region}.amazonaws.com&quot;]
+		29 |     }
+		30 |     resources = [&quot;*&quot;]
+		31 |     condition {
+		32 |       test     = &quot;ArnLike&quot;
+		33 |       variable = &quot;kms:EncryptionContext:aws:logs:arn&quot;
+		34 |       values   = [&quot;arn:${data.aws_partition.current.partition}:logs:${var.aws_region}:${data.aws_caller_identity.current.account_id}:*&quot;]
+		35 |     }
+		36 |   }
+		37 | }
+</failure>
+		</testcase>
+		<testcase name="[NONE][CKV_AWS_310] Ensure CloudFront distributions should have origin failover configured" classname="/frontend.tf.aws_cloudfront_distribution.main" file="/frontend.tf">
+			<failure type="failure" message="Ensure CloudFront distributions should have origin failover configured">
+Resource: aws_cloudfront_distribution.main
+File: /frontend.tf: 178-235
+Guideline: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-general-policies/bc-aws-310
+
+		Code lines for this resource are too many. Please use IDE of your choice to review the file.</failure>
+		</testcase>
+		<testcase name="[NONE][CKV_AWS_374] Ensure AWS CloudFront web distribution has geo restriction enabled" classname="/frontend.tf.aws_cloudfront_distribution.main" file="/frontend.tf">
+			<failure type="failure" message="Ensure AWS CloudFront web distribution has geo restriction enabled">
+Resource: aws_cloudfront_distribution.main
+File: /frontend.tf: 178-235
+Guideline: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-networking-policies/bc-aws-374
+
+		Code lines for this resource are too many. Please use IDE of your choice to review the file.</failure>
+		</testcase>
+		<testcase name="[NONE][CKV_AWS_86] Ensure CloudFront distribution has Access Logging enabled" classname="/frontend.tf.aws_cloudfront_distribution.main" file="/frontend.tf">
+			<failure type="failure" message="Ensure CloudFront distribution has Access Logging enabled">
+Resource: aws_cloudfront_distribution.main
+File: /frontend.tf: 178-235
+Guideline: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-logging-policies/logging-20
+
+		Code lines for this resource are too many. Please use IDE of your choice to review the file.</failure>
+		</testcase>
+		<testcase name="[NONE][CKV_AWS_356] Ensure no IAM policies documents allow &quot;*&quot; as a statement's resource for restrictable actions" classname="/frontend.tf.aws_iam_policy_document.frontend_kms" file="/frontend.tf">
+			<failure type="failure" message="Ensure no IAM policies documents allow &quot;*&quot; as a statement's resource for restrictable actions">
+Resource: aws_iam_policy_document.frontend_kms
+File: /frontend.tf: 23-51
+Guideline: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-iam-policies/bc-aws-356
+
+		23 | data &quot;aws_iam_policy_document&quot; &quot;frontend_kms&quot; {
+		24 |   statement {
+		25 |     sid    = &quot;EnableRootAccess&quot;
+		26 |     effect = &quot;Allow&quot;
+		27 |     principals {
+		28 |       type        = &quot;AWS&quot;
+		29 |       identifiers = [&quot;arn:${data.aws_partition.current.partition}:iam::${data.aws_caller_identity.current.account_id}:root&quot;]
+		30 |     }
+		31 |     actions   = [&quot;kms:*&quot;]
+		32 |     resources = [&quot;*&quot;]
+		33 |   }
+		34 | 
+		35 |   # CloudFront OAC necesita Decrypt/GenerateDataKey para servir objetos SSE-KMS.
+		36 |   statement {
+		37 |     sid    = &quot;AllowCloudFrontOAC&quot;
+		38 |     effect = &quot;Allow&quot;
+		39 |     principals {
+		40 |       type        = &quot;Service&quot;
+		41 |       identifiers = [&quot;cloudfront.amazonaws.com&quot;]
+		42 |     }
+		43 |     actions   = [&quot;kms:Decrypt&quot;, &quot;kms:GenerateDataKey&quot;]
+		44 |     resources = [&quot;*&quot;]
+		45 |     condition {
+		46 |       test     = &quot;StringEquals&quot;
+		47 |       variable = &quot;aws:SourceArn&quot;
+		48 |       values   = [aws_cloudfront_distribution.main.arn]
+		49 |     }
+		50 |   }
+		51 | }
+</failure>
+		</testcase>
+		<testcase name="[NONE][CKV_AWS_109] Ensure IAM policies does not allow permissions management / resource exposure without constraints" classname="/frontend.tf.aws_iam_policy_document.frontend_kms" file="/frontend.tf">
+			<failure type="failure" message="Ensure IAM policies does not allow permissions management / resource exposure without constraints">
+Resource: aws_iam_policy_document.frontend_kms
+File: /frontend.tf: 23-51
+Guideline: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-iam-policies/ensure-iam-policies-do-not-allow-permissions-management-resource-exposure-without-constraint
+
+		23 | data &quot;aws_iam_policy_document&quot; &quot;frontend_kms&quot; {
+		24 |   statement {
+		25 |     sid    = &quot;EnableRootAccess&quot;
+		26 |     effect = &quot;Allow&quot;
+		27 |     principals {
+		28 |       type        = &quot;AWS&quot;
+		29 |       identifiers = [&quot;arn:${data.aws_partition.current.partition}:iam::${data.aws_caller_identity.current.account_id}:root&quot;]
+		30 |     }
+		31 |     actions   = [&quot;kms:*&quot;]
+		32 |     resources = [&quot;*&quot;]
+		33 |   }
+		34 | 
+		35 |   # CloudFront OAC necesita Decrypt/GenerateDataKey para servir objetos SSE-KMS.
+		36 |   statement {
+		37 |     sid    = &quot;AllowCloudFrontOAC&quot;
+		38 |     effect = &quot;Allow&quot;
+		39 |     principals {
+		40 |       type        = &quot;Service&quot;
+		41 |       identifiers = [&quot;cloudfront.amazonaws.com&quot;]
+		42 |     }
+		43 |     actions   = [&quot;kms:Decrypt&quot;, &quot;kms:GenerateDataKey&quot;]
+		44 |     resources = [&quot;*&quot;]
+		45 |     condition {
+		46 |       test     = &quot;StringEquals&quot;
+		47 |       variable = &quot;aws:SourceArn&quot;
+		48 |       values   = [aws_cloudfront_distribution.main.arn]
+		49 |     }
+		50 |   }
+		51 | }
+</failure>
+		</testcase>
+		<testcase name="[NONE][CKV_AWS_111] Ensure IAM policies does not allow write access without constraints" classname="/frontend.tf.aws_iam_policy_document.frontend_kms" file="/frontend.tf">
+			<failure type="failure" message="Ensure IAM policies does not allow write access without constraints">
+Resource: aws_iam_policy_document.frontend_kms
+File: /frontend.tf: 23-51
+Guideline: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-iam-policies/ensure-iam-policies-do-not-allow-write-access-without-constraint
+
+		23 | data &quot;aws_iam_policy_document&quot; &quot;frontend_kms&quot; {
+		24 |   statement {
+		25 |     sid    = &quot;EnableRootAccess&quot;
+		26 |     effect = &quot;Allow&quot;
+		27 |     principals {
+		28 |       type        = &quot;AWS&quot;
+		29 |       identifiers = [&quot;arn:${data.aws_partition.current.partition}:iam::${data.aws_caller_identity.current.account_id}:root&quot;]
+		30 |     }
+		31 |     actions   = [&quot;kms:*&quot;]
+		32 |     resources = [&quot;*&quot;]
+		33 |   }
+		34 | 
+		35 |   # CloudFront OAC necesita Decrypt/GenerateDataKey para servir objetos SSE-KMS.
+		36 |   statement {
+		37 |     sid    = &quot;AllowCloudFrontOAC&quot;
+		38 |     effect = &quot;Allow&quot;
+		39 |     principals {
+		40 |       type        = &quot;Service&quot;
+		41 |       identifiers = [&quot;cloudfront.amazonaws.com&quot;]
+		42 |     }
+		43 |     actions   = [&quot;kms:Decrypt&quot;, &quot;kms:GenerateDataKey&quot;]
+		44 |     resources = [&quot;*&quot;]
+		45 |     condition {
+		46 |       test     = &quot;StringEquals&quot;
+		47 |       variable = &quot;aws:SourceArn&quot;
+		48 |       values   = [aws_cloudfront_distribution.main.arn]
+		49 |     }
+		50 |   }
+		51 | }
+</failure>
+		</testcase>
+		<testcase name="[NONE][CKV_AWS_356] Ensure no IAM policies documents allow &quot;*&quot; as a statement's resource for restrictable actions" classname="/monitoring.tf.aws_iam_policy_document.monitoring_kms" file="/monitoring.tf">
+			<failure type="failure" message="Ensure no IAM policies documents allow &quot;*&quot; as a statement's resource for restrictable actions">
+Resource: aws_iam_policy_document.monitoring_kms
+File: /monitoring.tf: 18-45
+Guideline: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-iam-policies/bc-aws-356
+
+		18 | data &quot;aws_iam_policy_document&quot; &quot;monitoring_kms&quot; {
+		19 |   statement {
+		20 |     sid    = &quot;EnableRootAccess&quot;
+		21 |     effect = &quot;Allow&quot;
+		22 |     principals {
+		23 |       type        = &quot;AWS&quot;
+		24 |       identifiers = [&quot;arn:${data.aws_partition.current.partition}:iam::${data.aws_caller_identity.current.account_id}:root&quot;]
+		25 |     }
+		26 |     actions   = [&quot;kms:*&quot;]
+		27 |     resources = [&quot;*&quot;]
+		28 |   }
+		29 | 
+		30 |   statement {
+		31 |     sid    = &quot;AllowCloudWatchAlarms&quot;
+		32 |     effect = &quot;Allow&quot;
+		33 |     principals {
+		34 |       type        = &quot;Service&quot;
+		35 |       identifiers = [&quot;cloudwatch.amazonaws.com&quot;]
+		36 |     }
+		37 |     actions   = [&quot;kms:GenerateDataKey*&quot;, &quot;kms:Decrypt&quot;]
+		38 |     resources = [&quot;*&quot;]
+		39 |     condition {
+		40 |       test     = &quot;StringEquals&quot;
+		41 |       variable = &quot;aws:SourceAccount&quot;
+		42 |       values   = [data.aws_caller_identity.current.account_id]
+		43 |     }
+		44 |   }
+		45 | }
+</failure>
+		</testcase>
+		<testcase name="[NONE][CKV_AWS_109] Ensure IAM policies does not allow permissions management / resource exposure without constraints" classname="/monitoring.tf.aws_iam_policy_document.monitoring_kms" file="/monitoring.tf">
+			<failure type="failure" message="Ensure IAM policies does not allow permissions management / resource exposure without constraints">
+Resource: aws_iam_policy_document.monitoring_kms
+File: /monitoring.tf: 18-45
+Guideline: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-iam-policies/ensure-iam-policies-do-not-allow-permissions-management-resource-exposure-without-constraint
+
+		18 | data &quot;aws_iam_policy_document&quot; &quot;monitoring_kms&quot; {
+		19 |   statement {
+		20 |     sid    = &quot;EnableRootAccess&quot;
+		21 |     effect = &quot;Allow&quot;
+		22 |     principals {
+		23 |       type        = &quot;AWS&quot;
+		24 |       identifiers = [&quot;arn:${data.aws_partition.current.partition}:iam::${data.aws_caller_identity.current.account_id}:root&quot;]
+		25 |     }
+		26 |     actions   = [&quot;kms:*&quot;]
+		27 |     resources = [&quot;*&quot;]
+		28 |   }
+		29 | 
+		30 |   statement {
+		31 |     sid    = &quot;AllowCloudWatchAlarms&quot;
+		32 |     effect = &quot;Allow&quot;
+		33 |     principals {
+		34 |       type        = &quot;Service&quot;
+		35 |       identifiers = [&quot;cloudwatch.amazonaws.com&quot;]
+		36 |     }
+		37 |     actions   = [&quot;kms:GenerateDataKey*&quot;, &quot;kms:Decrypt&quot;]
+		38 |     resources = [&quot;*&quot;]
+		39 |     condition {
+		40 |       test     = &quot;StringEquals&quot;
+		41 |       variable = &quot;aws:SourceAccount&quot;
+		42 |       values   = [data.aws_caller_identity.current.account_id]
+		43 |     }
+		44 |   }
+		45 | }
+</failure>
+		</testcase>
+		<testcase name="[NONE][CKV_AWS_111] Ensure IAM policies does not allow write access without constraints" classname="/monitoring.tf.aws_iam_policy_document.monitoring_kms" file="/monitoring.tf">
+			<failure type="failure" message="Ensure IAM policies does not allow write access without constraints">
+Resource: aws_iam_policy_document.monitoring_kms
+File: /monitoring.tf: 18-45
+Guideline: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-iam-policies/ensure-iam-policies-do-not-allow-write-access-without-constraint
+
+		18 | data &quot;aws_iam_policy_document&quot; &quot;monitoring_kms&quot; {
+		19 |   statement {
+		20 |     sid    = &quot;EnableRootAccess&quot;
+		21 |     effect = &quot;Allow&quot;
+		22 |     principals {
+		23 |       type        = &quot;AWS&quot;
+		24 |       identifiers = [&quot;arn:${data.aws_partition.current.partition}:iam::${data.aws_caller_identity.current.account_id}:root&quot;]
+		25 |     }
+		26 |     actions   = [&quot;kms:*&quot;]
+		27 |     resources = [&quot;*&quot;]
+		28 |   }
+		29 | 
+		30 |   statement {
+		31 |     sid    = &quot;AllowCloudWatchAlarms&quot;
+		32 |     effect = &quot;Allow&quot;
+		33 |     principals {
+		34 |       type        = &quot;Service&quot;
+		35 |       identifiers = [&quot;cloudwatch.amazonaws.com&quot;]
+		36 |     }
+		37 |     actions   = [&quot;kms:GenerateDataKey*&quot;, &quot;kms:Decrypt&quot;]
+		38 |     resources = [&quot;*&quot;]
+		39 |     condition {
+		40 |       test     = &quot;StringEquals&quot;
+		41 |       variable = &quot;aws:SourceAccount&quot;
+		42 |       values   = [data.aws_caller_identity.current.account_id]
+		43 |     }
+		44 |   }
+		45 | }
+</failure>
+		</testcase>
+		<testcase name="[NONE][CKV_AWS_293] Ensure that AWS database instances have deletion protection enabled" classname="/rds.tf.aws_db_instance.main" file="/rds.tf">
+			<failure type="failure" message="Ensure that AWS database instances have deletion protection enabled">
+Resource: aws_db_instance.main
+File: /rds.tf: 117-172
+Guideline: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-general-policies/bc-aws-293
+
+		Code lines for this resource are too many. Please use IDE of your choice to review the file.</failure>
+		</testcase>
+		<testcase name="[NONE][CKV_AWS_161] Ensure RDS database has IAM authentication enabled" classname="/rds.tf.aws_db_instance.main" file="/rds.tf">
+			<failure type="failure" message="Ensure RDS database has IAM authentication enabled">
+Resource: aws_db_instance.main
+File: /rds.tf: 117-172
+Guideline: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-iam-policies/ensure-rds-database-has-iam-authentication-enabled
+
+		Code lines for this resource are too many. Please use IDE of your choice to review the file.</failure>
+		</testcase>
+		<testcase name="[NONE][CKV_AWS_260] Ensure no security groups allow ingress from 0.0.0.0:0 to port 80" classname="/security_groups.tf.aws_vpc_security_group_ingress_rule.alb_http" file="/security_groups.tf">
+			<failure type="failure" message="Ensure no security groups allow ingress from 0.0.0.0:0 to port 80">
+Resource: aws_vpc_security_group_ingress_rule.alb_http
+File: /security_groups.tf: 26-33
+Guideline: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-networking-policies/ensure-aws-security-groups-do-not-allow-ingress-from-00000-to-port-80
+
+		26 | resource &quot;aws_vpc_security_group_ingress_rule&quot; &quot;alb_http&quot; {
+		27 |   security_group_id = aws_security_group.alb.id
+		28 |   description       = &quot;HTTP desde internet (redirect 80-&gt;443 en ALB listener)&quot;
+		29 |   from_port         = 80
+		30 |   to_port           = 80
+		31 |   ip_protocol       = &quot;tcp&quot;
+		32 |   cidr_ipv4         = &quot;0.0.0.0/0&quot;
+		33 | }
+</failure>
+		</testcase>
+		<testcase name="[NONE][CKV_AWS_130] Ensure VPC subnets do not assign public IP by default" classname="/vpc.tf.aws_subnet.public[0]" file="/vpc.tf">
+			<failure type="failure" message="Ensure VPC subnets do not assign public IP by default">
+Resource: aws_subnet.public[0]
+File: /vpc.tf: 15-27
+Guideline: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-networking-policies/ensure-vpc-subnets-do-not-assign-public-ip-by-default
+
+		15 | resource &quot;aws_subnet&quot; &quot;public&quot; {
+		16 |   count = length(var.availability_zones)
+		17 | 
+		18 |   vpc_id                  = aws_vpc.main.id
+		19 |   cidr_block              = var.public_subnet_cidrs[count.index]
+		20 |   availability_zone       = var.availability_zones[count.index]
+		21 |   map_public_ip_on_launch = true
+		22 | 
+		23 |   tags = {
+		24 |     Name = &quot;${var.project}-${var.environment}-public-${var.availability_zones[count.index]}&quot;
+		25 |     Tier = &quot;public&quot;
+		26 |   }
+		27 | }
+</failure>
+		</testcase>
+		<testcase name="[NONE][CKV_AWS_130] Ensure VPC subnets do not assign public IP by default" classname="/vpc.tf.aws_subnet.public[1]" file="/vpc.tf">
+			<failure type="failure" message="Ensure VPC subnets do not assign public IP by default">
+Resource: aws_subnet.public[1]
+File: /vpc.tf: 15-27
+Guideline: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-networking-policies/ensure-vpc-subnets-do-not-assign-public-ip-by-default
+
+		15 | resource &quot;aws_subnet&quot; &quot;public&quot; {
+		16 |   count = length(var.availability_zones)
+		17 | 
+		18 |   vpc_id                  = aws_vpc.main.id
+		19 |   cidr_block              = var.public_subnet_cidrs[count.index]
+		20 |   availability_zone       = var.availability_zones[count.index]
+		21 |   map_public_ip_on_launch = true
+		22 | 
+		23 |   tags = {
+		24 |     Name = &quot;${var.project}-${var.environment}-public-${var.availability_zones[count.index]}&quot;
+		25 |     Tier = &quot;public&quot;
+		26 |   }
+		27 | }
+</failure>
+		</testcase>
+		<testcase name="[NONE][CKV2_AWS_57] Ensure Secrets Manager secrets should have automatic rotation enabled" classname="/rds.tf.aws_secretsmanager_secret.rds" file="/rds.tf">
+			<failure type="failure" message="Ensure Secrets Manager secrets should have automatic rotation enabled">
+Resource: aws_secretsmanager_secret.rds
+File: /rds.tf: 69-75
+Guideline: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-general-policies/bc-aws-2-57
+
+		69 | resource &quot;aws_secretsmanager_secret&quot; &quot;rds&quot; {
+		70 |   name                    = &quot;${var.project}/${var.environment}/rds/credentials&quot;
+		71 |   kms_key_id              = aws_kms_key.rds.arn
+		72 |   recovery_window_in_days = var.secrets_recovery_window_days
+		73 | 
+		74 |   tags = { Name = &quot;${var.project}-${var.environment}-secret-rds&quot; }
+		75 | }
+</failure>
+		</testcase>
+		<testcase name="[NONE][CKV2_AWS_28] Ensure public facing ALB are protected by WAF" classname="/alb.tf.aws_lb.main" file="/alb.tf">
+			<failure type="failure" message="Ensure public facing ALB are protected by WAF">
+Resource: aws_lb.main
+File: /alb.tf: 45-66
+Guideline: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-networking-policies/ensure-public-facing-alb-are-protected-by-waf
+
+		45 | resource &quot;aws_lb&quot; &quot;main&quot; {
+		46 |   name               = &quot;${var.project}-${var.environment}-alb&quot;
+		47 |   internal           = false
+		48 |   load_balancer_type = &quot;application&quot;
+		49 |   security_groups    = [aws_security_group.alb.id]
+		50 |   subnets            = aws_subnet.public[*].id
+		51 | 
+		52 |   enable_deletion_protection = true
+		53 | 
+		54 |   dynamic &quot;access_logs&quot; {
+		55 |     for_each = var.alb_access_logs_bucket != &quot;&quot; ? [1] : []
+		56 |     content {
+		57 |       bucket  = var.alb_access_logs_bucket
+		58 |       prefix  = &quot;${var.project}/${var.environment}/alb&quot;
+		59 |       enabled = true
+		60 |     }
+		61 |   }
+		62 | 
+		63 |   tags = {
+		64 |     Name = &quot;${var.project}-${var.environment}-alb&quot;
+		65 |   }
+		66 | }
+</failure>
+		</testcase>
+		<testcase name="[NONE][CKV2_AWS_64] Ensure KMS key Policy is defined" classname="/ecr.tf.aws_kms_key.ecr" file="/ecr.tf">
+			<failure type="failure" message="Ensure KMS key Policy is defined">
+Resource: aws_kms_key.ecr
+File: /ecr.tf: 3-11
+Guideline: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-iam-policies/bc-aws-2-64
+
+		3  | resource &quot;aws_kms_key&quot; &quot;ecr&quot; {
+		4  |   description             = &quot;${var.project}-${var.environment}: cifrado repositorios ECR&quot;
+		5  |   deletion_window_in_days = var.kms_deletion_window_days
+		6  |   enable_key_rotation     = true
+		7  | 
+		8  |   tags = {
+		9  |     Name = &quot;${var.project}-${var.environment}-kms-ecr&quot;
+		10 |   }
+		11 | }
+</failure>
+		</testcase>
+		<testcase name="[NONE][CKV2_AWS_64] Ensure KMS key Policy is defined" classname="/rds.tf.aws_kms_key.rds" file="/rds.tf">
+			<failure type="failure" message="Ensure KMS key Policy is defined">
+Resource: aws_kms_key.rds
+File: /rds.tf: 3-9
+Guideline: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-iam-policies/bc-aws-2-64
+
+		3 | resource &quot;aws_kms_key&quot; &quot;rds&quot; {
+		4 |   description             = &quot;${var.project}-${var.environment}: cifrado RDS PostgreSQL&quot;
+		5 |   deletion_window_in_days = var.kms_deletion_window_days
+		6 |   enable_key_rotation     = true
+		7 | 
+		8 |   tags = { Name = &quot;${var.project}-${var.environment}-kms-rds&quot; }
+		9 | }
+</failure>
+		</testcase>
+		<testcase name="[NONE][CKV2_AWS_39] Ensure Domain Name System (DNS) query logging is enabled for Amazon Route 53 hosted zones" classname="/route53.tf.aws_route53_zone.main" file="/route53.tf">
+			<failure type="failure" message="Ensure Domain Name System (DNS) query logging is enabled for Amazon Route 53 hosted zones">
+Resource: aws_route53_zone.main
+File: /route53.tf: 3-9
+Guideline: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-logging-policies/bc-aws-2-39
+
+		3 | resource &quot;aws_route53_zone&quot; &quot;main&quot; {
+		4 |   name = var.domain_name
+		5 | 
+		6 |   tags = {
+		7 |     Name = &quot;${var.project}-${var.environment}-zone&quot;
+		8 |   }
+		9 | }
+</failure>
+		</testcase>
+		<testcase name="[NONE][CKV2_AWS_32] Ensure CloudFront distribution has a response headers policy attached" classname="/frontend.tf.aws_cloudfront_distribution.main" file="/frontend.tf">
+			<failure type="failure" message="Ensure CloudFront distribution has a response headers policy attached">
+Resource: aws_cloudfront_distribution.main
+File: /frontend.tf: 178-235
+Guideline: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-networking-policies/bc-aws-networking-65
+
+		Code lines for this resource are too many. Please use IDE of your choice to review the file.</failure>
+		</testcase>
+		<testcase name="[NONE][CKV_AWS_18] Ensure the S3 bucket has access logging enabled" classname="/frontend.tf.aws_s3_bucket.frontend" file="/frontend.tf">
+			<failure type="failure" message="Ensure the S3 bucket has access logging enabled">
+Resource: aws_s3_bucket.frontend
+File: /frontend.tf: 55-60
+Guideline: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/s3-policies/s3-13-enable-logging
+
+		55 | resource &quot;aws_s3_bucket&quot; &quot;frontend&quot; {
+		56 |   bucket        = &quot;${var.project}-${var.environment}-frontend-${data.aws_caller_identity.current.account_id}&quot;
+		57 |   force_destroy = var.s3_frontend_force_destroy
+		58 | 
+		59 |   tags = { Name = &quot;${var.project}-${var.environment}-frontend&quot; }
+		60 | }
+</failure>
+		</testcase>
+		<testcase name="[NONE][CKV2_AWS_38] Ensure Domain Name System Security Extensions (DNSSEC) signing is enabled for Amazon Route 53 public hosted zones" classname="/route53.tf.aws_route53_zone.main" file="/route53.tf">
+			<failure type="failure" message="Ensure Domain Name System Security Extensions (DNSSEC) signing is enabled for Amazon Route 53 public hosted zones">
+Resource: aws_route53_zone.main
+File: /route53.tf: 3-9
+Guideline: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-networking-policies/bc-aws-2-38
+
+		3 | resource &quot;aws_route53_zone&quot; &quot;main&quot; {
+		4 |   name = var.domain_name
+		5 | 
+		6 |   tags = {
+		7 |     Name = &quot;${var.project}-${var.environment}-zone&quot;
+		8 |   }
+		9 | }
+</failure>
+		</testcase>
+		<testcase name="[NONE][CKV2_AWS_62] Ensure S3 buckets should have event notifications enabled" classname="/frontend.tf.aws_s3_bucket.frontend" file="/frontend.tf">
+			<failure type="failure" message="Ensure S3 buckets should have event notifications enabled">
+Resource: aws_s3_bucket.frontend
+File: /frontend.tf: 55-60
+Guideline: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-logging-policies/bc-aws-2-62
+
+		55 | resource &quot;aws_s3_bucket&quot; &quot;frontend&quot; {
+		56 |   bucket        = &quot;${var.project}-${var.environment}-frontend-${data.aws_caller_identity.current.account_id}&quot;
+		57 |   force_destroy = var.s3_frontend_force_destroy
+		58 | 
+		59 |   tags = { Name = &quot;${var.project}-${var.environment}-frontend&quot; }
+		60 | }
+</failure>
+		</testcase>
+		<testcase name="[NONE][CKV2_AWS_11] Ensure VPC flow logging is enabled in all VPCs" classname="/vpc.tf.aws_vpc.main" file="/vpc.tf">
+			<failure type="failure" message="Ensure VPC flow logging is enabled in all VPCs">
+Resource: aws_vpc.main
+File: /vpc.tf: 3-11
+Guideline: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-logging-policies/logging-9-enable-vpc-flow-logging
+
+		3  | resource &quot;aws_vpc&quot; &quot;main&quot; {
+		4  |   cidr_block           = var.vpc_cidr
+		5  |   enable_dns_hostnames = true
+		6  |   enable_dns_support   = true
+		7  | 
+		8  |   tags = {
+		9  |     Name = &quot;${var.project}-${var.environment}-vpc&quot;
+		10 |   }
+		11 | }
+</failure>
+		</testcase>
+		<testcase name="[NONE][CKV_AWS_378] Ensure AWS Load Balancer doesn't use HTTP protocol" classname="/alb.tf.aws_lb_target_group.reservas" file="/alb.tf">
+			<failure type="failure" message="Ensure AWS Load Balancer doesn't use HTTP protocol">
+Resource: aws_lb_target_group.reservas
+File: /alb.tf: 70-97
+Guideline: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-networking-policies/bc-aws-378
+
+		70 | resource &quot;aws_lb_target_group&quot; &quot;reservas&quot; {
+		71 |   name        = &quot;${var.project}-${var.environment}-tg-reservas&quot;
+		72 |   port        = 3000
+		73 |   protocol    = &quot;HTTP&quot;
+		74 |   vpc_id      = aws_vpc.main.id
+		75 |   target_type = &quot;ip&quot;
+		76 | 
+		77 |   health_check {
+		78 |     enabled             = true
+		79 |     path                = var.alb_health_check_path
+		80 |     protocol            = &quot;HTTP&quot;
+		81 |     port                = &quot;traffic-port&quot;
+		82 |     healthy_threshold   = 2
+		83 |     unhealthy_threshold = 3
+		84 |     timeout             = 5
+		85 |     interval            = 30
+		86 |     matcher             = &quot;200-299&quot;
+		87 |   }
+		88 | 
+		89 |   lifecycle {
+		90 |     create_before_destroy = true
+		91 |   }
+		92 | 
+		93 |   tags = {
+		94 |     Name    = &quot;${var.project}-${var.environment}-tg-reservas&quot;
+		95 |     Service = &quot;svc-reservas&quot;
+		96 |   }
+		97 | }
+</failure>
+		</testcase>
+		<testcase name="[NONE][CKV_AWS_378] Ensure AWS Load Balancer doesn't use HTTP protocol" classname="/alb.tf.aws_lb_target_group.pagos" file="/alb.tf">
+			<failure type="failure" message="Ensure AWS Load Balancer doesn't use HTTP protocol">
+Resource: aws_lb_target_group.pagos
+File: /alb.tf: 101-128
+Guideline: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-networking-policies/bc-aws-378
+
+		101 | resource &quot;aws_lb_target_group&quot; &quot;pagos&quot; {
+		102 |   name        = &quot;${var.project}-${var.environment}-tg-pagos&quot;
+		103 |   port        = 3001
+		104 |   protocol    = &quot;HTTP&quot;
+		105 |   vpc_id      = aws_vpc.main.id
+		106 |   target_type = &quot;ip&quot;
+		107 | 
+		108 |   health_check {
+		109 |     enabled             = true
+		110 |     path                = var.alb_health_check_path
+		111 |     protocol            = &quot;HTTP&quot;
+		112 |     port                = &quot;traffic-port&quot;
+		113 |     healthy_threshold   = 2
+		114 |     unhealthy_threshold = 3
+		115 |     timeout             = 5
+		116 |     interval            = 30
+		117 |     matcher             = &quot;200-299&quot;
+		118 |   }
+		119 | 
+		120 |   lifecycle {
+		121 |     create_before_destroy = true
+		122 |   }
+		123 | 
+		124 |   tags = {
+		125 |     Name    = &quot;${var.project}-${var.environment}-tg-pagos&quot;
+		126 |     Service = &quot;svc-pagos&quot;
+		127 |   }
+		128 | }
+</failure>
+		</testcase>
+		<testcase name="[NONE][CKV2_AWS_47] Ensure AWS CloudFront attached WAFv2 WebACL is configured with AMR for Log4j Vulnerability" classname="/frontend.tf.aws_cloudfront_distribution.main" file="/frontend.tf">
+			<failure type="failure" message="Ensure AWS CloudFront attached WAFv2 WebACL is configured with AMR for Log4j Vulnerability">
+Resource: aws_cloudfront_distribution.main
+File: /frontend.tf: 178-235
+Guideline: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-general-policies/bc-aws-general-47
+
+		Code lines for this resource are too many. Please use IDE of your choice to review the file.</failure>
+		</testcase>
+		<testcase name="[NONE][CKV_AWS_144] Ensure that S3 bucket has cross-region replication enabled" classname="/frontend.tf.aws_s3_bucket.frontend" file="/frontend.tf">
+			<failure type="failure" message="Ensure that S3 bucket has cross-region replication enabled">
+Resource: aws_s3_bucket.frontend
+File: /frontend.tf: 55-60
+Guideline: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-general-policies/ensure-that-s3-bucket-has-cross-region-replication-enabled
+
+		55 | resource &quot;aws_s3_bucket&quot; &quot;frontend&quot; {
+		56 |   bucket        = &quot;${var.project}-${var.environment}-frontend-${data.aws_caller_identity.current.account_id}&quot;
+		57 |   force_destroy = var.s3_frontend_force_destroy
+		58 | 
+		59 |   tags = { Name = &quot;${var.project}-${var.environment}-frontend&quot; }
+		60 | }
+</failure>
+		</testcase>
+	</testsuite>
+</testsuites>
