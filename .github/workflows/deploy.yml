@@ -1,0 +1,258 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# Hotel Nyx — Deploy (Despliegue). Se dispara manualmente o en push a main.
+#
+# Flujo:  build-and-push → terraform-plan → [APROBACIÓN MANUAL] → terraform-apply
+#                                                         ├──► db-orchestrate (Ansible)
+#                                                         └──► frontend (S3 + CloudFront)
+#
+# SEGURIDAD: ninguna credencial en el archivo. La autenticación a AWS es vía OIDC
+# (rol IAM asumible por GitHub Actions); el ARN del rol vive en GitHub Secrets.
+# Ver .github/README.md para el rol/secrets a crear.
+#
+# El `terraform apply` NUNCA es automático: el job terraform-apply usa el
+# Environment "production", que debe tener una protection rule con required
+# reviewers → exige aprobación humana antes de ejecutarse.
+# ─────────────────────────────────────────────────────────────────────────────
+name: Deploy
+
+on:
+  workflow_dispatch: {}
+  push:
+    branches: [main]
+
+# OIDC: 'id-token: write' permite a las actions pedir el token y asumir el rol.
+permissions:
+  id-token: write
+  contents: read
+
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  AWS_REGION: us-east-2
+
+jobs:
+  # ── 1) Build + push de imágenes a ECR (tag = SHA del commit) ────────────────
+  build-and-push:
+    name: build & push (${{ matrix.service }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - service: svc-reservas
+            context: app/reservas
+            repo: hotel-nyx/dev/svc-reservas
+          - service: svc-pagos
+            context: app/pagos
+            repo: hotel-nyx/dev/svc-pagos
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configurar credenciales AWS (OIDC)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_DEPLOY_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Login a Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      # ECR está en modo IMMUTABLE: cada commit produce un tag único (el SHA),
+      # nunca se sobreescribe 'latest'. Multi-stage build lo define el Dockerfile.
+      - name: Build & push (tag = SHA)
+        env:
+          REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        run: |
+          IMAGE="$REGISTRY/${{ matrix.repo }}:${{ github.sha }}"
+          docker build -t "$IMAGE" "${{ matrix.context }}"
+          docker push "$IMAGE"
+
+  # ── 2) terraform plan → artifact (NO aplica) ────────────────────────────────
+  terraform-plan:
+    name: terraform plan
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: iac
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configurar credenciales AWS (OIDC)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_DEPLOY_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.9.8
+
+      # Requiere un backend remoto (S3 + DynamoDB) para compartir el state con el
+      # job de apply. Ver README — sin backend remoto, plan y apply no comparten estado.
+      - name: terraform init
+        run: terraform init -input=false
+
+      # Cablea el tag de imagen (SHA) en las task definitions de ECS, para que el
+      # apply registre una revisión nueva y dispare el rollout con esa imagen.
+      - name: terraform plan
+        run: |
+          terraform plan -input=false -out=tfplan \
+            -var="ecs_reservas_image_tag=${{ github.sha }}" \
+            -var="ecs_pagos_image_tag=${{ github.sha }}"
+
+      - name: Subir el plan como artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: tfplan
+          path: iac/tfplan
+          retention-days: 5
+
+  # ── 3) terraform apply — REQUIERE APROBACIÓN MANUAL ─────────────────────────
+  terraform-apply:
+    name: terraform apply (aprobación manual)
+    needs: [build-and-push, terraform-plan]
+    runs-on: ubuntu-latest
+    # 👇 Punto de control humano: el Environment "production" debe configurarse en
+    #    Settings → Environments con "Required reviewers". El job queda en pausa
+    #    hasta que un reviewer aprueba. SIN aprobación, el apply NO corre.
+    environment: production
+    defaults:
+      run:
+        working-directory: iac
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configurar credenciales AWS (OIDC)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_DEPLOY_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.9.8
+
+      - name: terraform init
+        run: terraform init -input=false
+
+      - name: Descargar el plan aprobado
+        uses: actions/download-artifact@v4
+        with:
+          name: tfplan
+          path: iac
+
+      # Aplica EXACTAMENTE el plan revisado. Al registrar nuevas task definitions
+      # (imagen = SHA), ECS hace un rolling deployment (sin downtime).
+      - name: terraform apply
+        run: terraform apply -input=false tfplan
+
+  # ── 4) Orquestación de BD con Ansible (migrate + seed) ──────────────────────
+  db-orchestrate:
+    name: ansible migrate + seed
+    needs: terraform-apply
+    # ⚠️ ACCESO DE RED AL RDS PRIVADO: el RDS vive en subnets privadas y NO se
+    #    expone a internet. Un runner GitHub-hosted estándar NO tiene acceso a la
+    #    VPC. Para que migrate/seed funcionen hay que usar UNA de estas opciones
+    #    (ver README) y cambiar 'runs-on' en consecuencia:
+    #      a) self-hosted runner desplegado dentro de la VPC,
+    #      b) SSM port-forward a través de un bastión,
+    #      c) ejecutar este paso desde CodeBuild en la VPC.
+    #    NO abrir el RDS a internet.
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ansible
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configurar credenciales AWS (OIDC)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_DEPLOY_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: app/reservas/package-lock.json
+
+      - name: Preparar Prisma (svc-reservas)
+        working-directory: app/reservas
+        run: |
+          npm ci
+          npx prisma generate
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instalar Ansible + colecciones
+        run: |
+          python -m pip install --upgrade pip
+          pip install ansible-core psycopg2-binary boto3 botocore
+          ansible-galaxy collection install amazon.aws community.aws community.postgresql
+
+      # Reutiliza el ansible/ ya versionado: solo migrate + seed.
+      # NOTA: NO se corre el playbook 04 (deploy) aquí — su build/push duplicaría
+      # el de build-and-push y chocaría con el ECR IMMUTABLE (mismo tag SHA). El
+      # rollout de ECS ya lo dispara el terraform apply (nueva task definition).
+      - name: Ansible — migraciones y seed
+        run: ansible-playbook playbooks/site.yml --tags migrate,seed
+
+  # ── 5) Frontend: rellenar config.js, sync a S3, invalidar CloudFront ────────
+  frontend:
+    name: frontend → S3 + CloudFront
+    needs: terraform-apply
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configurar credenciales AWS (OIDC)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_DEPLOY_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.9.8
+          terraform_wrapper: false   # necesario para capturar outputs con $()
+
+      - name: terraform init
+        run: terraform -chdir=iac init -input=false
+
+      # Los valores PÚBLICOS del frontend salen de los outputs de Terraform.
+      # (MP_PUBLIC_KEY es pública pero NO es output de TF: viene de vars.MP_PUBLIC_KEY.)
+      - name: Leer outputs de Terraform
+        id: tfout
+        run: |
+          {
+            echo "bucket=$(terraform -chdir=iac output -raw s3_frontend_bucket_name)"
+            echo "cf=$(terraform -chdir=iac output -raw cloudfront_distribution_id)"
+            echo "api=$(terraform -chdir=iac output -raw api_custom_domain_url)"
+            echo "hosted_ui=$(terraform -chdir=iac output -raw cognito_hosted_ui_url)"
+            echo "pool=$(terraform -chdir=iac output -raw cognito_user_pool_id)"
+            echo "client=$(terraform -chdir=iac output -raw cognito_client_id)"
+          } >> "$GITHUB_OUTPUT"
+
+      # Rellena los placeholders REEMPLAZAR_* de config.js con valores reales.
+      # Depende de que esos outputs existan tras el apply (no se inventan valores).
+      - name: Rellenar placeholders públicos de config.js
+        run: |
+          cd app/frontend/js
+          sed -i "s|https://REEMPLAZAR_API_GATEWAY|${{ steps.tfout.outputs.api }}|" config.js
+          sed -i "s|https://REEMPLAZAR_COGNITO_HOSTED_UI|${{ steps.tfout.outputs.hosted_ui }}|" config.js
+          sed -i "s|REEMPLAZAR_USER_POOL_ID|${{ steps.tfout.outputs.pool }}|" config.js
+          sed -i "s|REEMPLAZAR_CLIENT_ID|${{ steps.tfout.outputs.client }}|" config.js
+          sed -i "s|TEST-REEMPLAZAR_MP_PUBLIC_KEY|${{ vars.MP_PUBLIC_KEY }}|" config.js
+
+      - name: Sync a S3 (con --delete) + invalidación de CloudFront
+        run: |
+          aws s3 sync app/frontend "s3://${{ steps.tfout.outputs.bucket }}" --delete
+          aws cloudfront create-invalidation \
+            --distribution-id "${{ steps.tfout.outputs.cf }}" \
+            --paths "/*"

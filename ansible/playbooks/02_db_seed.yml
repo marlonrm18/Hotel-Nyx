@@ -1,0 +1,50 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# 02 — Seed de datos iniciales: habitaciones del hotel.
+#
+# SEGURIDAD: las credenciales de BD se leen del secret de RDS en Secrets Manager
+# (igual que 01). No se hardcodean. ssl_mode=require. no_log en las tareas que ven
+# la password.
+#
+# IDEMPOTENCIA: INSERT ... ON CONFLICT (numero) DO NOTHING. La columna `numero`
+# tiene un UNIQUE index (habitaciones_numero_key), así que reaplicar el seed no
+# duplica filas. `created_at` usa su DEFAULT; `estado` usa el default 'disponible';
+# `updated_at` no tiene default en el schema → lo seteamos a now().
+#
+# RED: mismo requisito que 01 — acceso a la VPC privada del RDS (ver README).
+# DEPENDENCIA: requiere que 01_db_migrate ya haya creado la tabla `habitaciones`.
+# ─────────────────────────────────────────────────────────────────────────────
+- name: "02 · Seed de habitaciones → RDS (idempotente)"
+  hosts: local
+  gather_facts: false
+  tags: ["seed"]
+
+  vars:
+    rds_secret: "{{ lookup('amazon.aws.aws_secret', rds_secret_name, region=aws_region) | from_json }}"
+
+  tasks:
+    - name: Insertar habitaciones iniciales (ON CONFLICT DO NOTHING)
+      community.postgresql.postgresql_query:
+        login_host: "{{ rds_secret.host }}"
+        login_user: "{{ rds_secret.username }}"
+        login_password: "{{ rds_secret.password }}"
+        port: "{{ rds_secret.port }}"
+        login_db: "{{ rds_secret.dbname }}"
+        ssl_mode: require
+        query: >-
+          INSERT INTO habitaciones (numero, tipo, capacidad, precio_noche, updated_at)
+          VALUES (%(numero)s, %(tipo)s, %(capacidad)s, %(precio_noche)s, now())
+          ON CONFLICT (numero) DO NOTHING
+        named_args:
+          numero: "{{ item.numero }}"
+          tipo: "{{ item.tipo }}"
+          capacidad: "{{ item.capacidad }}"
+          precio_noche: "{{ item.precio_noche }}"
+      loop: "{{ habitaciones_seed }}"
+      loop_control:
+        label: "habitacion {{ item.numero }}"
+      register: seed_result
+      no_log: true
+
+    - name: Resumen del seed
+      ansible.builtin.debug:
+        msg: "Seed de {{ habitaciones_seed | length }} habitaciones aplicado (las ya existentes se omiten)."

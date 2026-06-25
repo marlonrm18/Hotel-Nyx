@@ -1,0 +1,27 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# site.yml — Playbook MAESTRO. Orquesta el orden completo post-Terraform:
+#
+#   01 migrate  → 02 seed → 03 secrets → 04 deploy
+#
+# Cada bloque conserva sus tags, así que se pueden correr por separado:
+#   ansible-playbook playbooks/site.yml --tags migrate
+#   ansible-playbook playbooks/site.yml --tags seed
+#   ansible-playbook playbooks/site.yml --tags secrets
+#   ansible-playbook playbooks/site.yml --tags deploy
+#   ansible-playbook playbooks/site.yml --tags migrate,seed
+#
+# Orden lógico:
+#   1. Las migraciones crean el schema (tabla habitaciones, constraints).
+#   2. El seed necesita la tabla ya creada.
+#   3. El secret de Mercado Pago debe estar real ANTES de que el deploy levante
+#      tareas nuevas de pagos que lo leerán en runtime.
+#   4. El deploy publica imágenes y fuerza el rollout.
+# ─────────────────────────────────────────────────────────────────────────────
+- name: Hotel Nyx — orquestación de configuración (Modo A, localhost)
+  import_playbook: 01_db_migrate.yml
+
+- import_playbook: 02_db_seed.yml
+
+- import_playbook: 03_secrets.yml
+
+- import_playbook: 04_deploy.yml

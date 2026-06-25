@@ -1,0 +1,127 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# Hotel Nyx — CI (Integración Continua). Solo VALIDA: no toca AWS, no despliega.
+# Corre en cada PR y push a develop/main. Tres bloques: backend, IaC y Ansible.
+# ─────────────────────────────────────────────────────────────────────────────
+name: CI
+
+on:
+  pull_request:
+    branches: [develop, main]
+  push:
+    branches: [develop, main]
+
+# Cancela ejecuciones previas del mismo ref para ahorrar minutos.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+# CI no necesita credenciales: solo lectura del repo.
+permissions:
+  contents: read
+
+jobs:
+  # ── Backend: lint + test (o node --check) de reservas y pagos ───────────────
+  backend:
+    name: backend (${{ matrix.service }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        service: [reservas, pagos]
+    defaults:
+      run:
+        working-directory: app/${{ matrix.service }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: app/${{ matrix.service }}/package-lock.json
+
+      - name: Instalar dependencias
+        run: npm ci
+
+      - name: Generar Prisma Client
+        run: npx prisma generate
+
+      - name: Lint (si existe el script)
+        run: |
+          if npm run 2>/dev/null | grep -qE '^  lint'; then
+            npm run lint
+          else
+            echo "sin script 'lint' — omitido"
+          fi
+
+      - name: Test, o validación de sintaxis si no hay tests
+        run: |
+          if npm run 2>/dev/null | grep -qE '^  test'; then
+            npm test
+          else
+            echo "sin script 'test' — fallback a node --check"
+            node --check src/index.js
+          fi
+
+  # ── IaC: validación ESTÁTICA de Terraform (sin credenciales, sin backend) ───
+  iac-validate:
+    name: terraform fmt + validate
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: iac
+    env:
+      # Cachea los providers entre ejecuciones.
+      TF_PLUGIN_CACHE_DIR: ~/.terraform.d/plugin-cache
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Preparar caché de providers
+        run: mkdir -p ~/.terraform.d/plugin-cache
+
+      - uses: actions/cache@v4
+        with:
+          path: ~/.terraform.d/plugin-cache
+          key: tf-providers-${{ hashFiles('iac/.terraform.lock.hcl') }}
+          restore-keys: tf-providers-
+
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.9.8
+
+      - name: terraform fmt -check (recursivo, incluye módulos)
+        run: terraform fmt -check -recursive
+
+      # -backend=false: no contacta ningún backend remoto ni AWS.
+      - name: terraform init (sin backend)
+        run: terraform init -backend=false -input=false
+
+      - name: terraform validate
+        run: terraform validate
+
+  # ── Ansible: lint + syntax-check (runner Linux; no contacta AWS) ────────────
+  ansible-lint:
+    name: ansible lint + syntax-check
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ansible
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instalar Ansible + colecciones
+        run: |
+          python -m pip install --upgrade pip
+          pip install ansible-core ansible-lint
+          ansible-galaxy collection install amazon.aws community.aws community.postgresql
+
+      # --syntax-check no contacta AWS: solo parsea estructura y módulos.
+      - name: Syntax-check del playbook maestro
+        run: ansible-playbook --syntax-check playbooks/site.yml
+
+      - name: ansible-lint
+        run: ansible-lint || true   # informativo; no bloquea el PR por estilo

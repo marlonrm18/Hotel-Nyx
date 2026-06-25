@@ -1,0 +1,52 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# Hotel Nyx — Variables NO sensibles, compartidas por todos los playbooks.
+# Aquí NO va ningún secreto (passwords, access_token, webhook_secret). Esos se
+# leen en runtime desde AWS Secrets Manager o se piden por prompt/vault.
+# Los nombres reflejan exactamente los recursos creados por Terraform en iac/.
+# ─────────────────────────────────────────────────────────────────────────────
+
+# ── Identidad del proyecto / región (espejo de iac/terraform.tfvars) ──────────
+project:     "hotel-nyx"
+# 'environment' es palabra reservada de Ansible (keyword de tarea) → usamos env_name.
+env_name:    "dev"
+aws_region:  "us-east-2"
+
+# ── Nombres de secrets en Secrets Manager (creados por module.secrets) ────────
+# RDS: JSON { engine, host, port, dbname, username, password } — lo crea Terraform.
+rds_secret_name:         "{{ project }}/{{ env_name }}/rds/credentials"
+# Mercado Pago: JSON { access_token, webhook_secret } — Terraform deja un
+# placeholder ("REEMPLAZAR") con lifecycle.ignore_changes; el valor real lo
+# inyecta 03_secrets.yml.
+mercadopago_secret_name: "{{ project }}/{{ env_name }}/mercadopago"
+
+# ── ECR (module.ecr) ──────────────────────────────────────────────────────────
+ecr_reservas_repo: "{{ project }}/{{ env_name }}/svc-reservas"
+ecr_pagos_repo:    "{{ project }}/{{ env_name }}/svc-pagos"
+
+# ── ECS (module.ecs) ──────────────────────────────────────────────────────────
+ecs_cluster_name:   "{{ project }}-{{ env_name }}-cluster"
+ecs_service_reservas: "{{ project }}-{{ env_name }}-svc-reservas"
+ecs_service_pagos:    "{{ project }}-{{ env_name }}-svc-pagos"
+# Familias de task definition (las registra Terraform). Pasamos solo la FAMILIA
+# —sin revisión— para que ECS resuelva siempre a la última revisión ACTIVE.
+ecs_taskdef_reservas: "{{ project }}-{{ env_name }}-svc-reservas"
+ecs_taskdef_pagos:    "{{ project }}-{{ env_name }}-svc-pagos"
+
+# ── Rutas del código (relativas a la raíz del repo) ───────────────────────────
+# playbook_dir = ansible/playbooks → la raíz del repo está dos niveles arriba.
+repo_root:        "{{ playbook_dir }}/../.."
+svc_reservas_dir: "{{ repo_root }}/app/reservas"
+svc_pagos_dir:    "{{ repo_root }}/app/pagos"
+
+# Tag de imagen a construir/publicar/desplegar (alineado con ecs_*_image_tag).
+image_tag: "latest"
+
+# ── Seed de habitaciones (datos iniciales, NO sensibles) ──────────────────────
+# Idempotente: 02_db_seed.yml inserta con ON CONFLICT (numero) DO NOTHING, así que
+# correrlo dos veces no duplica. La columna `estado` usa el default 'disponible'.
+habitaciones_seed:
+  - { numero: 101, tipo: "individual", capacidad: 1, precio_noche: 45.00 }
+  - { numero: 102, tipo: "individual", capacidad: 1, precio_noche: 45.00 }
+  - { numero: 201, tipo: "doble",      capacidad: 2, precio_noche: 70.00 }
+  - { numero: 202, tipo: "doble",      capacidad: 2, precio_noche: 70.00 }
+  - { numero: 301, tipo: "suite",      capacidad: 4, precio_noche: 120.00 }

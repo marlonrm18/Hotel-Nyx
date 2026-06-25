@@ -1,0 +1,54 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# 01 — Migraciones Prisma del servicio RESERVAS contra el RDS.
+#
+# SOLO reservas aplica migraciones (es el dueño del schema). pagos comparte la
+# misma BD pero NO migra.
+#
+# SEGURIDAD: la connection string se ARMA en runtime leyendo el secret de RDS
+# desde Secrets Manager (nunca se hardcodea ni se versiona la password). Se fuerza
+# sslmode=require. Las tareas que tocan la URL llevan no_log: true.
+#
+# IDEMPOTENCIA: `prisma migrate deploy` solo aplica migraciones pendientes; si ya
+# están aplicadas, no hace nada y no falla. Marcamos changed según la salida.
+#
+# RED: el RDS vive en subnets privadas. Este playbook DEBE correrse desde un punto
+# con acceso a la VPC (runner de CI en la red, bastión, o port-forward). No existe
+# acceso público al RDS — ver README.
+# ─────────────────────────────────────────────────────────────────────────────
+- name: "01 · Migraciones Prisma (svc-reservas) → RDS"
+  hosts: local
+  gather_facts: false
+  tags: ["migrate"]
+
+  vars:
+    # Lee el secret completo de RDS y lo parsea a dict. El lookup ocurre en el
+    # controlador usando las credenciales AWS del entorno.
+    rds_secret: "{{ lookup('amazon.aws.aws_secret', rds_secret_name, region=aws_region) | from_json }}"
+
+  tasks:
+    - name: Construir DATABASE_URL en memoria (no se persiste en disco)
+      ansible.builtin.set_fact:
+        database_url: >-
+          postgresql://{{ rds_secret.username }}:{{ rds_secret.password | urlencode }}@{{ rds_secret.host }}:{{ rds_secret.port }}/{{ rds_secret.dbname }}?sslmode=require
+      no_log: true
+
+    - name: Verificar que npx/Prisma están disponibles en el controlador
+      ansible.builtin.command: npx --version
+      args:
+        chdir: "{{ svc_reservas_dir }}"
+      changed_when: false
+
+    - name: Aplicar migraciones pendientes (prisma migrate deploy — idempotente)
+      ansible.builtin.command: npx prisma migrate deploy
+      args:
+        chdir: "{{ svc_reservas_dir }}"
+      environment:
+        DATABASE_URL: "{{ database_url }}"
+      register: prisma_migrate
+      # "No pending migrations to apply" ⇒ no hubo cambios.
+      changed_when: "'No pending migrations' not in prisma_migrate.stdout"
+      no_log: true
+
+    - name: Resumen de migración (sin exponer la connection string)
+      ansible.builtin.debug:
+        msg: "Migraciones aplicadas/al día contra el RDS de {{ project }}-{{ env_name }}."

@@ -1,0 +1,77 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# 04 — Despliegue: build + push de imágenes a ECR y force-new-deployment de los
+# servicios ECS (reservas y pagos).
+#
+# Terraform ya creó los repos ECR, el cluster, las task definitions y los
+# servicios. Aquí solo construimos/publicamos la imagen y forzamos a ECS a tomar
+# la nueva (rolling deployment, sin downtime — atributo DISPONIBILIDAD).
+#
+# SEGURIDAD: el login a ECR usa un token efímero de `aws ecr get-login-password`
+# (no se persiste ninguna credencial). Las credenciales AWS salen del entorno.
+#
+# IDEMPOTENCIA: `docker build` reusa caché. El rollout se hace con el módulo
+# community.aws.ecs_service (force_new_deployment), más idiomático que aws-cli:
+# resuelve el estado del servicio y lanza un rolling deploy.
+#
+# AUTOSCALING: `desired_count` lo gestiona Application Auto Scaling (Terraform lo
+# ignora con lifecycle.ignore_changes). Por eso NO pasamos desired_count al módulo
+# —así no peleamos con el autoscaler—; solo pasamos la familia de task definition
+# (sin revisión) para que ECS tome la última ACTIVE.
+# ─────────────────────────────────────────────────────────────────────────────
+- name: "04 · Build/push a ECR + force-new-deployment ECS"
+  hosts: local
+  gather_facts: false
+  tags: ["deploy"]
+
+  vars:
+    services:
+      - { repo: "{{ ecr_reservas_repo }}", context: "{{ svc_reservas_dir }}", service: "{{ ecs_service_reservas }}", taskdef: "{{ ecs_taskdef_reservas }}" }
+      - { repo: "{{ ecr_pagos_repo }}",    context: "{{ svc_pagos_dir }}",    service: "{{ ecs_service_pagos }}",    taskdef: "{{ ecs_taskdef_pagos }}" }
+
+  tasks:
+    - name: Obtener el account id (para componer el registry ECR)
+      amazon.aws.aws_caller_info:
+        region: "{{ aws_region }}"
+      register: caller
+
+    - name: Componer el host del registry ECR
+      ansible.builtin.set_fact:
+        ecr_registry: "{{ caller.account }}.dkr.ecr.{{ aws_region }}.amazonaws.com"
+
+    - name: Login a ECR (token efímero; no se guarda en disco)
+      ansible.builtin.shell: >-
+        set -o pipefail &&
+        aws ecr get-login-password --region {{ aws_region }}
+        | docker login --username AWS --password-stdin {{ ecr_registry }}
+      args:
+        executable: /bin/bash
+      changed_when: false
+      no_log: true
+
+    - name: Build de la imagen de cada servicio
+      ansible.builtin.command: >-
+        docker build -t {{ ecr_registry }}/{{ item.repo }}:{{ image_tag }} {{ item.context }}
+      loop: "{{ services }}"
+      loop_control:
+        label: "{{ item.repo }}"
+
+    - name: Push de la imagen a ECR
+      ansible.builtin.command: >-
+        docker push {{ ecr_registry }}/{{ item.repo }}:{{ image_tag }}
+      loop: "{{ services }}"
+      loop_control:
+        label: "{{ item.repo }}"
+
+    - name: Forzar nuevo despliegue del servicio ECS (rolling, sin downtime)
+      community.aws.ecs_service:
+        name: "{{ item.service }}"
+        cluster: "{{ ecs_cluster_name }}"
+        # Familia sin revisión ⇒ última task definition ACTIVE registrada por TF.
+        task_definition: "{{ item.taskdef }}"
+        region: "{{ aws_region }}"
+        state: present
+        force_new_deployment: true
+        # desired_count se omite a propósito: lo gobierna Application Auto Scaling.
+      loop: "{{ services }}"
+      loop_control:
+        label: "{{ item.service }}"
