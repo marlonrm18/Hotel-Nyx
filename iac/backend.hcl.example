@@ -1,0 +1,14 @@
+# Plantilla del backend-config PARCIAL para el IaC principal.
+#
+# Copia a backend.hcl (git-ignored) y rellena con los OUTPUTS del bootstrap:
+#   cd iac/bootstrap && terraform output state_bucket_name   → bucket
+#                       terraform output lock_table_name      → dynamodb_table
+#
+# Luego, en iac/:
+#   terraform init -backend-config=backend.hcl
+#
+# key / region / encrypt ya están fijados en backend.tf; aquí solo van los
+# valores específicos de la cuenta.
+
+bucket         = "hotel-nyx-tfstate-REEMPLAZAR_SUFIJO"
+dynamodb_table = "hotel-nyx-tflocks"

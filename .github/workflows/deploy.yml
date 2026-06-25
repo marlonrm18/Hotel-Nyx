@@ -90,10 +90,14 @@ jobs:
         with:
           terraform_version: 1.9.8
 
-      # Requiere un backend remoto (S3 + DynamoDB) para compartir el state con el
-      # job de apply. Ver README — sin backend remoto, plan y apply no comparten estado.
-      - name: terraform init
-        run: terraform init -input=false
+      # Backend remoto (S3 + DynamoDB) para compartir el state con el job de apply.
+      # bucket/tabla se inyectan por backend-config (no se hardcodean); key/region/
+      # encrypt viven en iac/backend.tf.
+      - name: terraform init (backend remoto)
+        run: |
+          terraform init -input=false \
+            -backend-config="bucket=${{ secrets.TF_STATE_BUCKET }}" \
+            -backend-config="dynamodb_table=${{ vars.TF_STATE_LOCK_TABLE }}"
 
       # Cablea el tag de imagen (SHA) en las task definitions de ECS, para que el
       # apply registre una revisión nueva y dispare el rollout con esa imagen.
@@ -135,8 +139,11 @@ jobs:
         with:
           terraform_version: 1.9.8
 
-      - name: terraform init
-        run: terraform init -input=false
+      - name: terraform init (backend remoto)
+        run: |
+          terraform init -input=false \
+            -backend-config="bucket=${{ secrets.TF_STATE_BUCKET }}" \
+            -backend-config="dynamodb_table=${{ vars.TF_STATE_LOCK_TABLE }}"
 
       - name: Descargar el plan aprobado
         uses: actions/download-artifact@v4
@@ -222,8 +229,12 @@ jobs:
           terraform_version: 1.9.8
           terraform_wrapper: false   # necesario para capturar outputs con $()
 
-      - name: terraform init
-        run: terraform -chdir=iac init -input=false
+      # Lee outputs ⇒ necesita el state remoto: mismo backend-config que plan/apply.
+      - name: terraform init (backend remoto)
+        run: |
+          terraform -chdir=iac init -input=false \
+            -backend-config="bucket=${{ secrets.TF_STATE_BUCKET }}" \
+            -backend-config="dynamodb_table=${{ vars.TF_STATE_LOCK_TABLE }}"
 
       # Los valores PÚBLICOS del frontend salen de los outputs de Terraform.
       # (MP_PUBLIC_KEY es pública pero NO es output de TF: viene de vars.MP_PUBLIC_KEY.)

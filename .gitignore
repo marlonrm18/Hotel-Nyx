@@ -10,6 +10,10 @@ crash.*.log
 *.tfvars
 !*.tfvars.example
 
+# ─── Backend-config parcial específico de la cuenta (sólo el .example se versiona) ─
+backend.hcl
+!backend.hcl.example
+
 # ─── Overrides locales ───────────────────────────────────────────────────────
 override.tf
 override.tf.json

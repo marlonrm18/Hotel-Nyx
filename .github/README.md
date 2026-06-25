@@ -59,11 +59,13 @@ automático, pero solo produce un artifact para revisión — nunca modifica inf
 | Nombre                  | Uso                                                                 |
 |-------------------------|---------------------------------------------------------------------|
 | `AWS_DEPLOY_ROLE_ARN`   | ARN del rol IAM que GitHub asume vía OIDC (ver abajo). Lo usan todos los jobs de `deploy.yml`. |
+| `TF_STATE_BUCKET`       | Nombre del bucket S3 del state remoto (output del bootstrap). Se pasa a `terraform init`. |
 
 ### Variables (no sensibles)
-| Nombre           | Uso                                                                          |
-|------------------|------------------------------------------------------------------------------|
-| `MP_PUBLIC_KEY`  | Public Key **de TEST** de Mercado Pago (es pública). Se inyecta en `config.js`. |
+| Nombre                | Uso                                                                          |
+|-----------------------|------------------------------------------------------------------------------|
+| `MP_PUBLIC_KEY`       | Public Key **de TEST** de Mercado Pago (es pública). Se inyecta en `config.js`. |
+| `TF_STATE_LOCK_TABLE` | Nombre de la tabla DynamoDB de locks (output del bootstrap). Se pasa a `terraform init`. |
 
 > No se usan **access keys de larga vida**. Si tu organización aún no soporta OIDC,
 > la alternativa sería `AWS_ACCESS_KEY_ID` / `AWS_SECRET_ACCESS_KEY` como secrets,
@@ -117,11 +119,20 @@ a este repo y, idealmente, a las ramas de despliegue):
 ## Prerrequisitos importantes (honestos, no inventados)
 
 ### Backend remoto de Terraform
-`terraform-plan` y `terraform-apply` son jobs **separados** que deben compartir el
-**state**. Hoy `iac/` no declara un backend remoto (state local). Para CI/CD hay que
-configurar un **backend S3 + DynamoDB** (lock) antes de usar `deploy.yml`; si no, el
-`apply` no vería el `plan`. El `init -backend=false` de `ci.yml` no se ve afectado
-(esa validación es estática).
+`terraform-plan` y `terraform-apply` son jobs **separados** que comparten el
+**state** vía el backend remoto **S3 + DynamoDB** declarado en `iac/backend.tf`
+(config parcial). Antes de usar `deploy.yml` hay que crear ese backend una vez con
+el **bootstrap** (`iac/bootstrap/`, ver su README). Los workflows pasan el bucket y
+la tabla al `terraform init` por `-backend-config` usando estos valores de GitHub:
+
+| Tipo     | Nombre                | Ejemplo de valor                  |
+|----------|-----------------------|-----------------------------------|
+| Secret   | `TF_STATE_BUCKET`     | `hotel-nyx-tfstate-<sufijo>`      |
+| Variable | `TF_STATE_LOCK_TABLE` | `hotel-nyx-tflocks`               |
+
+`key`/`region`/`encrypt` están fijos en `iac/backend.tf`, así que no se parametrizan.
+El `init -backend=false` de `ci.yml` (validación estática) no usa backend y no se ve
+afectado.
 
 ### Acceso de red al RDS privado (jobs de migración/seed)
 El RDS está en **subnets privadas** y **no** se expone a internet. Un runner

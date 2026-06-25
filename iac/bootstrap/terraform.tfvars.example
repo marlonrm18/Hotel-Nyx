@@ -1,0 +1,14 @@
+# Copia este archivo a terraform.tfvars y ajusta los valores.
+# (terraform.tfvars está git-ignored por *.tfvars en .gitignore.)
+
+aws_region = "us-east-2"
+project    = "hotel-nyx"
+
+# ⚠️ El nombre del bucket S3 es ÚNICO GLOBALMENTE. Usa un sufijo propio de tu
+# cuenta para evitar choques (p. ej. el account id o un id aleatorio corto).
+# Resultado: "hotel-nyx-tfstate-<name_suffix>".
+name_suffix = "REEMPLAZAR_SUFIJO" # ej. "123456789012" o "a1b2c3"
+
+# Opcionales (tienen default):
+# lock_table_name            = "hotel-nyx-tflocks"
+# force_destroy_state_bucket = false
